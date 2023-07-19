@@ -1,0 +1,19 @@
+{
+  "Vue Single File Component Composition API with TypeScript and SASS": {
+    "prefix": "jj_vbase-3-Ts-Scss",
+    "body": [
+      "<template>",
+      "\t",
+      "</template>",
+      "",
+      "<script setup lang=\"ts\">",
+      "${0}",
+      "</script>",
+      "",
+      "<style lang=\"scss\">",
+      "",
+      "</style>"
+    ],
+    "description": "Base for Vue File Composition API with SCSS"
+  }
+}

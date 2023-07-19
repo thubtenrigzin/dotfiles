@@ -1,0 +1,41 @@
+{
+  "Vue Pinia Single File Component Composition API": {
+    "prefix": "jj_piniabase",
+    "body": [
+      "import { ref, computed } from 'vue'",
+      "import { defineStore } from 'pinia'",
+	  "",
+      "export const use${1}Store = defineStore('${2}', () => {",
+	  "\t${0}",
+      "\treturn { }",
+      "})"
+    ],
+    "description": "Base for Pinia file within Vue project"
+  },
+  
+  "Vue Pinia State Data": {
+    "prefix": "jj_pina-state",
+    "body": [
+      "const ${1} = ref(${2});"
+    ],
+    "description": "Pinia State data"
+  },
+  
+  "Vue Pinia Computed Data": {
+    "prefix": "jj_pina-computed",
+    "body": [
+      "const ${1} = computed(() => ${2});"
+    ],
+    "description": "Pinia Computed data"
+  },
+  
+  "Vue Pinia Function": {
+    "prefix": "jj_pina-function",
+    "body": [          
+      "function ${1}() {",
+	  "\t${2}",
+      "}"
+    ],
+    "description": "Pinia Function"
+  }
+}

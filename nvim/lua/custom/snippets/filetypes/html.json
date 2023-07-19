@@ -1,0 +1,11 @@
+{
+  "example": {
+    "prefix": "example",
+    "body": [
+      "\\\\begin{example}",
+      "This is an example of custom snippets",
+      "\\\\end{example}"
+    ],
+    "description": "example"
+  }
+}

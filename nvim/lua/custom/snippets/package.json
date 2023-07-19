@@ -1,0 +1,19 @@
+{
+"name": "custom-snippets",
+  "contributes": {
+    "snippets": [
+      {
+        "language": "html",
+        "path": ".\\filetypes\\html.json"
+      },
+      {
+        "language": "vue",
+        "path": ".\\filetypes\\vue.json"
+      },
+	  {
+        "language": "typescript",
+        "path": ".\\filetypes\\typescript.json"
+      }
+    ]
+  }
+}
