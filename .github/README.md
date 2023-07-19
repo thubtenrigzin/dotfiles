@@ -1,7 +1,7 @@
-# Thubtenrigzin's dotfiles
+# Dotfiles
 
-All the configuration files for my multiplatform development environment.
+All the configuration files for a multiplatform development environment.
 
-## Neovim
+## nvim
 
-This is the repository containing my main custom setup by using [NvChad](https://github.com/NvChad/NvChad) as a base configuration.
+This is the repository containing my main custom setup of Neovim by using [NvChad](https://github.com/NvChad/NvChad) as a base configuration.
