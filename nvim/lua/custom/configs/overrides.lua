@@ -1,6 +1,6 @@
 local M = {}
 
-M.cmp = {  
+M.cmp = {
   sources = {
     { name = "luasnip" },
     { name = "nvim_lsp" },
@@ -8,7 +8,7 @@ M.cmp = {
     { name = "nvim_lua" },
     { name = "path" },
     {
-	  name = "spell",
+      name = "spell",
       option = {
         keep_all_entries = false,
         enable_in_context = function()
@@ -22,35 +22,35 @@ M.cmp = {
 M.mason = {
   ensure_installed = {
     -- lua stuff
-    --"lua-language-server",
+    "lua-language-server",
     --"stylua",
-	
-	-- web dev stuff
+
+    -- web dev stuff
     "css-lsp",
     "html-lsp",
     "json-lsp",
     "typescript-language-server",
     --"vue-language-server",
-	
+
     "deno",
     "prettier",
-	
-	-- c/cpp stuff
+
+    -- c/cpp stuff
     "clangd",
-	
+
     "clang-format",
-	
-	-- Go
-	"gopls",
-	
-	-- python
-	"pyright",
-	
-	-- DAP
-	"delve",
-	"cpptools",
-	"debugpy",
-	"node-debug2-adapter",
+
+    -- Go
+    "gopls",
+
+    -- python
+    "pyright",
+
+    -- DAP
+    "delve",
+    "cpptools",
+    "debugpy",
+    "node-debug2-adapter",
   },
 }
 
@@ -59,7 +59,7 @@ M.nvimtree = {
     side = "left",
     width = 30,
   },
-  
+
   git = { enable = true },
 
   renderer = {
@@ -99,26 +99,26 @@ M.treesitter = {
     --"python",
     --"regex",
     --"typescript",
-	--"scss",
+    --"scss",
     --"sql",
     --"vim",
     --"vue",
   },
-  
+
   matchup = {
     enable = true,
     disable = { "" }
   },
-  
+
   autotag = { enable = true },
-  
+
   indent = {
     enable = true,
-	disable = {
+    disable = {
       "python",
     },
   },
-  
+
   rainbow = {
     enable = true,
     --extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
@@ -127,10 +127,10 @@ M.treesitter = {
     --  "rainbow-parens",
     --  html = "rainbow-tags",
     --},
-	-- colors = {}, -- table of hex strings
+    -- colors = {}, -- table of hex strings
     -- termcolors = {} -- table of colour name strings
-	-- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
-  }  
+    -- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
+  }
 }
 
 return M

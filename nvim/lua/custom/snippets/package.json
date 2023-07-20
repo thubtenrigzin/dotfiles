@@ -1,5 +1,5 @@
 {
-"name": "custom-snippets",
+  "name": "custom-snippets",
   "contributes": {
     "snippets": [
       {
@@ -10,7 +10,7 @@
         "language": "vue",
         "path": ".\\filetypes\\vue.json"
       },
-	  {
+      {
         "language": "typescript",
         "path": ".\\filetypes\\typescript.json"
       }

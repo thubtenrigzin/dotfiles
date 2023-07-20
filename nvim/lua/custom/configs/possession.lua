@@ -8,8 +8,8 @@ require('telescope').load_extension('possession')
 
 possession.setup {
   commands = {
-        save = 'PossessionSave',
-        close = 'PossessionClose',
-        delete = 'PossessionDelete',
-    },
+    save = 'PossessionSave',
+    close = 'PossessionClose',
+    delete = 'PossessionDelete',
+  },
 }

@@ -1,21 +1,20 @@
 --[[
 TODO:
-nvim-code-action-menu <- colors + config file
-
 dap-go should not load if c or js...
-matchup not working
 lspsaga full setup in file
 ZEN <- event vimEnter vs BufWinEnter
-null-ls config
-telescope
+null-ls config file
+telescope config
 blankline config
-trouble config
+trouble config file
 cmp + codium + tabnine
+
+FIX:
+matchup not working
 
 NOTE:
 vim-surround ou mini-surround
 config auto-save
-
 command telescope not found
 change path spellcheck
 typescript.nvim vs typescript-tools
@@ -40,21 +39,21 @@ local plugins = {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-	  {
+      {
         "weilbith/nvim-code-action-menu",
         cmd = "CodeActionMenu",
-		config = function()
+        config = function()
           dofile(vim.g.base46_cache .. "git")
         end,
       },
-	
+
       -- lsp Saga
       {
         "glepnir//lspsaga.nvim",
         config = true
         --config = function()
-          --require("lspsaga").setup({})
-          --require "custom.configs.lspsaga"
+        --require("lspsaga").setup({})
+        --require "custom.configs.lspsaga"
         --end
       },
 
@@ -138,10 +137,10 @@ local plugins = {
 
   {
     "MattesGroeger/vim-bookmarks",
-	event = "VeryLazy",
-	init = function()
-	  require "custom.configs.bookmarks"
-	end,
+    event = "VeryLazy",
+    init = function()
+      require "custom.configs.bookmarks"
+    end,
   },
 
   -- code-minimap : https://github.com/wfxr/code-minimap

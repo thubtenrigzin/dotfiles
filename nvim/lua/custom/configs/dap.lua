@@ -23,24 +23,24 @@ vim.fn.sign_define('DapBreakpointRejected', {text='⬜', texthl='', linehl='', n
 dapui.setup({
   layouts = {
     {
-	  elements = {
-	  -- Elements can be strings or table with id and size keys.
-		{ id = "scopes", size = 0.25 },
-		"breakpoints",
-		"stacks",
-		"watches",
-	  },
-	  size = 40, -- 40 columns
-	  position = "right",
+      elements = {
+        -- Elements can be strings or table with id and size keys.
+        { id = "scopes", size = 0.25 },
+        "breakpoints",
+        "stacks",
+        "watches",
+      },
+      size = 40, -- 40 columns
+      position = "right",
     },
-  
+
     {
-	  elements = {
-		"repl",
-		"console",
-	  },
-	  size = 0.25, -- 25% of total lines
-	  position = "bottom",
+      elements = {
+        "repl",
+        "console",
+      },
+      size = 0.25, -- 25% of total lines
+      position = "bottom",
     },
   },
 })
@@ -92,23 +92,23 @@ dap.adapters.node2 = {
 }
 for _, language in ipairs({ 'typescript', 'javascript' }) do
   dap.configurations[language] = {
-  {
-    name = 'Launch',
-    type = 'node2',
-    request = 'launch',
-    program = '${file}',
-    cwd = vim.fn.getcwd(),
-    sourceMaps = true,
-    protocol = 'inspector',
-    console = 'integratedTerminal',
-    outFiles = {"${workspaceFolder}/dist/**/*.js"},
-  },
-  {
-    -- For this to work you need to make sure the node process is started with the `--inspect` flag.
-    name = 'Attach to process',
-    type = 'node2',
-    request = 'attach',
-    processId = require'dap.utils'.pick_process,
-  },
-}
+    {
+      name = 'Launch',
+      type = 'node2',
+      request = 'launch',
+      program = '${file}',
+      cwd = vim.fn.getcwd(),
+      sourceMaps = true,
+      protocol = 'inspector',
+      console = 'integratedTerminal',
+      outFiles = {"${workspaceFolder}/dist/**/*.js"},
+    },
+    {
+      -- For this to work you need to make sure the node process is started with the `--inspect` flag.
+      name = 'Attach to process',
+      type = 'node2',
+      request = 'attach',
+      processId = require'dap.utils'.pick_process,
+    },
+  }
 end

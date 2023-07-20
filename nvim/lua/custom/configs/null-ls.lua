@@ -7,7 +7,7 @@ end
 local b = null_ls.builtins
 
 local formatting = b.formatting
-local lint = b.diagnostics
+-- local lint = b.diagnostics
 
 local sources = {
   -- ts/js
@@ -17,7 +17,7 @@ local sources = {
 
   -- lua
   formatting.stylua,
-   
+
   -- cpp
   formatting.clang_format,
 
@@ -25,6 +25,6 @@ local sources = {
 }
 
 null_ls.setup {
-   debug = true,
-   sources = sources,
+  debug = true,
+  sources = sources,
 }

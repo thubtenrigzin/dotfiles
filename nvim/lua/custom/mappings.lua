@@ -34,15 +34,15 @@ M.disabled = {
 
     -- blankline
     ["<leader>cc"] = { "" },
-	
-	-- Git
-	["[c"] = { "" },
-	["]c"] = { "" },
-	["<leader>rh"] = { "" },
-	["<leader>ph"] = { "" },
-	["<leader>gb"] = { "" },
-	["<leader>td"] = { "" },
-	
+
+    -- Git
+    ["[c"] = { "" },
+    ["]c"] = { "" },
+    ["<leader>rh"] = { "" },
+    ["<leader>ph"] = { "" },
+    ["<leader>gb"] = { "" },
+    ["<leader>td"] = { "" },
+
 
     -- nvimtree
     ["<C-n>"] = { "" },
@@ -57,7 +57,7 @@ M.disabled = {
 
     -- tabufline
     ["<leader>x"] = { "" },
-	["<tab>"] = { "" },
+    ["<tab>"] = { "" },
 
     -- telescope
     ["<leader>gt"] = { "" },
@@ -71,24 +71,24 @@ M.disabled = {
     --
 
     ["<C-s>"] = { "" },
-	["<leader>b"] = { "" },
-	["<leader>ch"] = { "" },
-	
+    ["<leader>b"] = { "" },
+    ["<leader>ch"] = { "" },
+
 
     -- LSP stuffs
     ["gD"] = { "" },
     ["gd"] = { "" },
-	["gi"] = { "" },
-	["gr"] = { "" },
+    ["gi"] = { "" },
+    ["gr"] = { "" },
     ["<leader>ca"] = { "" },
     ["<leader>D"] = { "" },
     ["<leader>ra"] = { "" },
     ["<leader>wa"] = { "" },
     ["<leader>wr"] = { "" },
     ["<leader>wl"] = { "" },
-	["<leader>f"] = { "" },
-	["[d"] = { "" },
-	["]d"] = { "" },
+    ["<leader>f"] = { "" },
+    ["[d"] = { "" },
+    ["]d"] = { "" },
   },
 
   i = {                                                          -- Insert Mode
@@ -182,7 +182,7 @@ M.general = {
     ["<S-Tab>"] = { "<C-d>", "Decrease the indentation of the line" },
 
     -- Use both hands for }
-      ["<C-A-=>"] = { "}" },
+    ["<C-A-=>"] = { "}" },
 
     -- Super clipboard
     ["<C-S-c>"] = { '<Esc>"+yy:let @"=@0<cr>i', opts = { silent = true }, "Copy the line to the system clipboard" },
@@ -216,7 +216,7 @@ M.general = {
     ["<a-k>"] = { ":m '<-2<CR>gv=gv", "Slide up" },
     ["<a-j>"] = { ":m '>+1<CR>gv=gv", "Slide down" },
 
-    -- Super doble clipboard
+    -- Super double clipboard
     ["<A-d>"] = { '"_d', "Delete without yanking" },
     ["<Delete>"] = { '"_d', "Delete without yanking" },
 
@@ -253,7 +253,7 @@ M.general = {
   },
 
   c = {                                                         -- Command Mode
-    -- Super doble clipboard
+    -- Super double clipboard
     ["<A-p>"] = { '<C-r>"', "Paste to the command line" },
     ["<C-v>"] = { "<C-r>*", "Paste from the system clipboard to the command line" },
   },
@@ -434,7 +434,7 @@ M.tabufline = {
       end,
       "Close the current buffer",
     },
-	
+
     ["<leader><C-S-Tab>"] = { "<Cmd>tabnew <CR>", "Create a new Tab" },
     ["<leader><C-Tab>"] = { "<Cmd>tabn <CR>", "Go to the next Tab" },
     ["<leader><S-Tab>"] = { "<Cmd>tabp <CR>", "Go to the previous Tab" },
@@ -451,9 +451,9 @@ M.telescope = {
 
     -- Lsp stuffs
     ["<leader>fs"] = { "<cmd> Telescope lsp_document_symbols <CR>", "Find Symbols" },
-	
-	["<leader>fr"] = { "<cmd> Telescope lsp_references <CR>", "Find lsp References" },
-	["<leader>fi"] = { "<cmd> Telescope lsp_implementations <CR>", "Find lsp implementations" },
+
+    ["<leader>fr"] = { "<cmd> Telescope lsp_references <CR>", "Find lsp References" },
+    ["<leader>fi"] = { "<cmd> Telescope lsp_implementations <CR>", "Find lsp implementations" },
 
     -- pick a hidden term
     ["<leader>ft"] = { "<cmd> Telescope terms <CR>", "Pick an hidden term" },
@@ -482,7 +482,7 @@ M.bookmark = {
 }
 
 M.codeaction = {                                                          -- Normal
-  n = {	
+  n = {
     ["<leader>la"] = { "<cmd> CodeActionMenu <CR>", "LSP code action" },
   }
 }
@@ -689,20 +689,20 @@ M.lazygit = { n = { ["<leader>gg"] = { "<cmd> LazyGit <CR>", "Lazygit" } } }
 
 M.lspsaga = {                                                          -- Normal
   n = {
-	["<leader>ld"] = { "<cmd> Lspsaga goto_definition <CR>", "LSP Definition" },
-	["<leader>lwd"] = { "<cmd> Lspsaga peek_definition <CR>", "LSP preview definition" },
-	
-	["<leader>lt"] = { "<cmd> Lspsaga goto_type_definition <CR>", "LSP Definition" },
-	["<leader>lwt"] = { "<cmd> Lspsaga peek_type_definition <CR>", "LSP preview type definition" },
-	
-	["<F2>"] = { "<cmd> Lspsaga rename <CR>", "LSP rename" },
+    ["<leader>ld"] = { "<cmd> Lspsaga goto_definition <CR>", "LSP Definition" },
+    ["<leader>lwd"] = { "<cmd> Lspsaga peek_definition <CR>", "LSP preview definition" },
 
-	["K"] = { "<cmd> Lspsaga hover_doc <CR>", "Hover documentation" },
-	
-	["<leader>lxh"] = { "<cmd> Lspsaga diagnostic_jump_prev <CR>", "LSP previous diagnostic" },
-	["<leader>lxl"] = { "<cmd> Lspsaga diagnostic_jump_next <CR>", "LSP next diagnostic" },
-	["<leader>lxj"] = { "<cmd> Lspsaga show_line_diagnostics <CR>", "LSP line diagnostic" },
-	["<leader>lxk"] = { "<cmd> Lspsaga show_cursor_diagnostics <CR>", "LSP cursor diagnostic" },
+    ["<leader>lt"] = { "<cmd> Lspsaga goto_type_definition <CR>", "LSP Definition" },
+    ["<leader>lwt"] = { "<cmd> Lspsaga peek_type_definition <CR>", "LSP preview type definition" },
+
+    ["<F2>"] = { "<cmd> Lspsaga rename <CR>", "LSP rename" },
+
+    ["K"] = { "<cmd> Lspsaga hover_doc <CR>", "Hover documentation" },
+
+    ["<leader>lxh"] = { "<cmd> Lspsaga diagnostic_jump_prev <CR>", "LSP previous diagnostic" },
+    ["<leader>lxl"] = { "<cmd> Lspsaga diagnostic_jump_next <CR>", "LSP next diagnostic" },
+    ["<leader>lxj"] = { "<cmd> Lspsaga show_line_diagnostics <CR>", "LSP line diagnostic" },
+    ["<leader>lxk"] = { "<cmd> Lspsaga show_cursor_diagnostics <CR>", "LSP cursor diagnostic" },
   }
 }
 
@@ -829,14 +829,14 @@ M.togglelspdiagunderline = {
 M.trouble = {
   n = {                                                          -- Normal Mode
     ["<leader>lr"] = { "<cmd> TroubleToggle lsp_references <CR>", "LSP References" },
-	
-	["<leader>li"] = { "<cmd> TroubleToggle lsp_implementations <CR>", "LSP Implementation" },
+
+    ["<leader>li"] = { "<cmd> TroubleToggle lsp_implementations <CR>", "LSP Implementation" },
 
     ["<leader>lx"] = { "<cmd> TroubleToggle document_diagnostics <CR>", "LSP Document Diagnostics" },
     ["<leader>lWx"] = { "<cmd> TroubleToggle workspace_diagnostics <CR>", "LSP Workspace Diagnostics" },
 
     ["<leader>ll"] = { "<cmd> TroubleToggle loclist <CR>", "Loclist" },
-	
+
     ["<leader>lq"] = { "<cmd> TroubleToggle quickfix <CR>", "Quickfix list" },
   }
 }

@@ -11,6 +11,7 @@ rmdir /s /q "%USERPROFILE%\AppData\Local\nvim\.git"
 git clone https://github.com/NvChad/NvChad %USERPROFILE%\AppData\Local\nvim --depth 1
 
 xcopy /e /i /q .\spell %USERPROFILE%\AppData\Local\nvim\spell\
+xcopy /e /i /q .\after %USERPROFILE%\AppData\Local\nvim\after\
 xcopy /e /i /q /y .\lua\custom %USERPROFILE%\AppData\Local\nvim\lua\custom
 
 setlocal

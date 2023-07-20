@@ -4,8 +4,8 @@ local M = {}
 local highlights = require "custom.highlights"
 
 M.ui = {
-  theme = "gruvbox",
-  theme_toggle = { "gruvbox", "gruvbox_light" },
+  theme = "chadracula",
+  theme_toggle = { "chadracula", "chadracula_light" },
 
   statusline = {
     theme = "default",
@@ -13,7 +13,7 @@ M.ui = {
 
   hl_override = highlights.override,
   hl_add = highlights.add,
-  
+
   nvdash = {
     load_on_startup = false,
 

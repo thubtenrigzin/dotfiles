@@ -10,9 +10,9 @@ illuminate.configure {
     "treesitter",
     "regex",
   },
-  
+
   delay = 1000,
-  
+
   filetypes_denylist = {
     "NvimTree",
     "Lazy",

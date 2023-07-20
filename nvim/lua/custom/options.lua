@@ -31,11 +31,11 @@ opt.spelllang = { "fr", "en", "es" }
 g.vscode_snippets_path = vim.fn.stdpath "config" .. "\\lua\\custom\\snippets"
 
 -- Folding settings
-  -- zc fold block
-  -- zo unfold block
-  -- zM fold all blocks
-  -- zR unfold all blocks
-  -- za toggle folding
+-- zc fold block
+-- zo unfold block
+-- zM fold all blocks
+-- zR unfold all blocks
+-- za toggle folding
 opt.foldcolumn = "1" -- show foldcolumn in nvim 0.9
 opt.foldlevel = 1
 opt.foldnestmax = 1
