@@ -308,6 +308,45 @@ M.Lazy = {
   },
 }
 
+M.lspconfig = {
+  n = {                                                          -- Normal Mode
+    ["<leader>lf"] = {
+      function()
+        vim.lsp.buf.format { async = true }
+      end,
+      "LSP formatting",
+    },
+
+    ["<leader>lD"] = {
+      function()
+        vim.lsp.buf.declaration()
+      end,
+      "LSP declaration",
+    },
+
+    ["<leader>lWa"] = {
+      function()
+        vim.lsp.buf.add_workspace_folder()
+      end,
+      "Add workspace folder",
+    },
+
+    ["<leader>lWr"] = {
+      function()
+        vim.lsp.buf.remove_workspace_folder()
+      end,
+      "Remove workspace folder",
+    },
+
+    ["<leader>lWl"] = {
+      function()
+        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+      end,
+      "List workspace folders",
+    },
+  }
+}
+
 M.nvimtree = {
   n = {                                                          -- Normal Mode
     ["<A-e>"] = { "<cmd> NvimTreeToggle <CR>", "Toggle nvimtree" },
@@ -440,6 +479,12 @@ M.bookmark = {
     ["<leader>bml"] = { "<cmd> BookmarkMoveToLine <CR>", "Move bookmark to line" },
     --@@ ["<leader>bm"] = { "<cmd>Telescope vim_bookmarks all <CR>", " Bookmark Menu" },
   },
+}
+
+M.codeaction = {                                                          -- Normal
+  n = {	
+    ["<leader>la"] = { "<cmd> CodeActionMenu <CR>", "LSP code action" },
+  }
 }
 
 M.dap = {                                                          -- Normal
@@ -642,64 +687,8 @@ M.harpoon = {
 
 M.lazygit = { n = { ["<leader>gg"] = { "<cmd> LazyGit <CR>", "Lazygit" } } }
 
-M.lspconfig = {
-  n = {                                                          -- Normal Mode
-    ["<leader>lf"] = {
-      function()
-        vim.lsp.buf.format { async = true }
-      end,
-      "LSP formatting",
-    },
-
-    ["<leader>lD"] = {
-      function()
-        vim.lsp.buf.declaration()
-      end,
-      "LSP declaration",
-    },
-
-    ["<leader>lWa"] = {
-      function()
-        vim.lsp.buf.add_workspace_folder()
-      end,
-      "Add workspace folder",
-    },
-
-    ["<leader>lWr"] = {
-      function()
-        vim.lsp.buf.remove_workspace_folder()
-      end,
-      "Remove workspace folder",
-    },
-
-    ["<leader>lWl"] = {
-      function()
-        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-      end,
-      "List workspace folders",
-    },
-  }
-}
-
-M.trouble = {
-  n = {                                                          -- Normal Mode
-    ["<leader>lr"] = { "<cmd> TroubleToggle lsp_references <CR>", "LSP References" },
-	
-	["<leader>li"] = { "<cmd> TroubleToggle lsp_implementations <CR>", "LSP Implementation" },
-
-    ["<leader>lx"] = { "<cmd> TroubleToggle document_diagnostics <CR>", "LSP Document Diagnostics" },
-    ["<leader>lWx"] = { "<cmd> TroubleToggle workspace_diagnostics <CR>", "LSP Workspace Diagnostics" },
-
-    ["<leader>ll"] = { "<cmd> TroubleToggle loclist <CR>", "Loclist" },
-	
-    ["<leader>lq"] = { "<cmd> TroubleToggle quickfix <CR>", "Quickfix list" },
-  }
-}
-
 M.lspsaga = {                                                          -- Normal
-  n = {	
-	["<leader>la"] = { "<cmd> Lspsaga code_action <CR>", "LSP code action" },
-
+  n = {
 	["<leader>ld"] = { "<cmd> Lspsaga goto_definition <CR>", "LSP Definition" },
 	["<leader>lwd"] = { "<cmd> Lspsaga peek_definition <CR>", "LSP preview definition" },
 	
@@ -834,6 +823,21 @@ M.togglelspdiagunderline = {
   n = {                                                          -- Normal Mode
     -- ["<F12>"] = { "<Plug>(toggle-lsp-diag-underline) <Plug>(toggle-lsp-diag-vtext) <Esc>hh", { noremap = false } },
     ["<F12>"] = { "<Plug>(toggle-lsp-diag-underline) <Plug>(toggle-lsp-diag-vtext) <Esc>hh", "Toggle the diagnostics" },
+  }
+}
+
+M.trouble = {
+  n = {                                                          -- Normal Mode
+    ["<leader>lr"] = { "<cmd> TroubleToggle lsp_references <CR>", "LSP References" },
+	
+	["<leader>li"] = { "<cmd> TroubleToggle lsp_implementations <CR>", "LSP Implementation" },
+
+    ["<leader>lx"] = { "<cmd> TroubleToggle document_diagnostics <CR>", "LSP Document Diagnostics" },
+    ["<leader>lWx"] = { "<cmd> TroubleToggle workspace_diagnostics <CR>", "LSP Workspace Diagnostics" },
+
+    ["<leader>ll"] = { "<cmd> TroubleToggle loclist <CR>", "Loclist" },
+	
+    ["<leader>lq"] = { "<cmd> TroubleToggle quickfix <CR>", "Quickfix list" },
   }
 }
 

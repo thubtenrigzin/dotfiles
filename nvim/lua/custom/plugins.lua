@@ -43,10 +43,8 @@ local plugins = {
 	  {
         "weilbith/nvim-code-action-menu",
         cmd = "CodeActionMenu",
-        init = function()      
-          vim.g.code_action_menu_show_details = true
-          vim.g.code_action_menu_show_diff = true
-          vim.g.code_action_menu_show_action_kind = true
+		config = function()
+          dofile(vim.g.base46_cache .. "git")
         end,
       },
 	
@@ -138,7 +136,13 @@ local plugins = {
     end,
   },
 
-  { "MattesGroeger/vim-bookmarks", event = "VeryLazy" },
+  {
+    "MattesGroeger/vim-bookmarks",
+	event = "VeryLazy",
+	init = function()
+	  require "custom.configs.bookmarks"
+	end,
+  },
 
   -- code-minimap : https://github.com/wfxr/code-minimap
   { "wfxr/minimap.vim", event = "VeryLazy" },

@@ -27,10 +27,6 @@ opt.clipboard = ""
 opt.spell = false
 opt.spelllang = { "fr", "en", "es" }
 
--- bookmark
-g.bookmark_no_default_key_mappings = 1
-g.bookmark_sign = ""
-
 -- snippets path
 g.vscode_snippets_path = vim.fn.stdpath "config" .. "\\lua\\custom\\snippets"
 
