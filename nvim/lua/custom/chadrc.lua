@@ -9,6 +9,15 @@ M.ui = {
 
   statusline = {
     theme = "default",
+
+    overriden_modules = function()
+      local st_modules = require "nvchad_ui.statusline.default"
+      return {
+        cwd = function()
+          return (vim.g.codeium and "{...}" or "") .. " " .. st_modules.cwd()
+        end,
+      }
+    end,
   },
 
   hl_override = highlights.override,

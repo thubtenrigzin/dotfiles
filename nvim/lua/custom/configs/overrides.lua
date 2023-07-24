@@ -19,6 +19,7 @@ M.cmp = {
         end,
       },
     },
+    { name = 'emoji' },
   },
 }
 

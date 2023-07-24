@@ -30,7 +30,10 @@ local plugins = {
 
   {
     "hrsh7th/nvim-cmp",
-    dependencies = { "f3fora/cmp-spell" },
+    dependencies = {
+      "hrsh7th/cmp-emoji",
+      "f3fora/cmp-spell",
+    },
     opts = overrides.cmp,
   },
 
@@ -116,6 +119,14 @@ local plugins = {
     config = function()
       dofile(vim.g.base46_cache .. "git")
     end,
+  },
+
+  {
+    "Exafunction/codeium.vim",
+    event = "VeryLazy",
+    config = function()
+      require "custom.configs.codeium"
+    end
   },
 
   --

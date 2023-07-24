@@ -504,6 +504,19 @@ M.codeaction = {
   }
 }
 
+M.codeium = {
+  n = {                                                          -- Normal Mode
+    ["<A-c>o"] = { "<cmd> CodeiumToggle <CR>", "Toggle Codeium" },
+  },
+
+  i = {                                                          -- Insert Mode
+    ["<A-c>j"] = { "codeium#Accept()", opts = { expr = true, nowait = true, silent = true }, "Accept Codeium suggestion" },
+    ["<A-c>l"] = { "<Cmd> call codeium#CycleCompletions(1) <CR>", opts = { expr = true }, "Next Codeium suggestion" },
+    ["<A-c>h"] = { "<Cmd> call codeium#CycleCompletions(-1) <CR>", opts = { expr = true }, "Previous Codeium suggestion" },
+    ["<A-c>k"] = { "<Cmd> call codeium#Clear() <CR>", opts = { expr = true }, "Clear Codeium suggestion" },
+  }
+}
+
 M.dap = {
   n = {                                                          -- Normal Mode
     ["<leader>dd"] = {
