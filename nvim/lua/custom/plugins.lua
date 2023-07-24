@@ -1,6 +1,5 @@
 --[[
 TODO:
-dap-go should not load if c or js...
 lspsaga full setup in file
 ZEN <- event vimEnter vs BufWinEnter
 null-ls config file
@@ -8,13 +7,13 @@ telescope config
 blankline config
 trouble config file
 cmp + codium + tabnine
+noice config file
 
 FIX:
 matchup not working
 
 NOTE:
 vim-surround ou mini-surround
-config auto-save
 command telescope not found
 change path spellcheck
 typescript.nvim vs typescript-tools
@@ -40,30 +39,9 @@ local plugins = {
     "neovim/nvim-lspconfig",
     dependencies = {
       {
-        "weilbith/nvim-code-action-menu",
-        cmd = "CodeActionMenu",
-        config = function()
-          dofile(vim.g.base46_cache .. "git")
-        end,
-      },
-
-      -- lsp Saga
-      {
-        "glepnir//lspsaga.nvim",
-        config = true
-        --config = function()
-        --require("lspsaga").setup({})
-        --require "custom.configs.lspsaga"
-        --end
-      },
-
-      {
         "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim",
         config = function()
-          require'toggle_lsp_diagnostics'.init({
-            underline = false,
-            virtual_text = false,
-          })
+          require "custom.configs.toggle-lsp-diag"
         end,
       },
 
@@ -74,16 +52,9 @@ local plugins = {
         end,
       },
 
-      -- Schemas store
-      -- https://www.schemastore.org/json/
-      {
-        "b0o/SchemaStore.nvim",
-        config = function()
-          require "custom.configs.providers"
-        end,
-      },
+      { "glepnir//lspsaga.nvim", config = true },
 
-      { "simrat39/symbols-outline.nvim", cmd = "SymbolsOutline", config = true },
+      "b0o/SchemaStore.nvim", -- https://www.schemastore.org/json/
     },
     config = function()
       require "plugins.configs.lspconfig"
@@ -102,6 +73,13 @@ local plugins = {
     dependencies = {
       "windwp/nvim-ts-autotag",
       "HiPhish/nvim-ts-rainbow2",
+
+      {
+        "JoosepAlviste/nvim-ts-context-commentstring",
+        config = function()
+          require "custom.configs.comment"
+        end
+      },
     },
     opts = overrides.treesitter,
     config = function(_, opts)
@@ -126,16 +104,6 @@ local plugins = {
   --------------------------- Other plugins ---------------------------
 
   {
-    "Pocco81/auto-save.nvim",
-    cmd = "ASToggle",
-    config = function()
-      require("auto-save").setup {
-        enabled = false
-      }
-    end,
-  },
-
-  {
     "MattesGroeger/vim-bookmarks",
     event = "VeryLazy",
     init = function()
@@ -143,8 +111,17 @@ local plugins = {
     end,
   },
 
-  -- code-minimap : https://github.com/wfxr/code-minimap
-  { "wfxr/minimap.vim", event = "VeryLazy" },
+  {
+    "weilbith/nvim-code-action-menu",
+    cmd = "CodeActionMenu",
+    config = function()
+      dofile(vim.g.base46_cache .. "git")
+    end,
+  },
+
+  --
+  -- DAP
+  --
 
   {
     "mfussenegger/nvim-dap",
@@ -153,30 +130,44 @@ local plugins = {
         "rcarriga/nvim-dap-ui",
         dependencies = { "theHamsta/nvim-dap-virtual-text", config = true },
       },
-
-      -- python
-      {
-        "mfussenegger/nvim-dap-python",
-        config = function()
-          require("dap-python").setup(vim.fn.getcwd() .. '\\.virtualenvs\\debugpy\\Scripts\\python' )
-        end,
-      },
-
-      -- Go
-      {
-        "leoluz/nvim-dap-go",
-        ft = "go",
-        config = true
-      },
     },
     config = function()
       require "custom.configs.dap"
     end,
   },
 
+  -- Go
+  {
+    "leoluz/nvim-dap-go",
+    ft = "go",
+    config = true
+  },
+
+  -- python
+  {
+    "mfussenegger/nvim-dap-python",
+    ft = "python",
+    config = function()
+      require("dap-python").setup(vim.fn.getcwd() .. '\\.virtualenvs\\debugpy\\Scripts\\python' )
+    end,
+  },
+
+  { "drzel/vim-gui-zoom", cmd = { "ZoomIn", "ZoomOut" } },
+
   { "ThePrimeagen/harpoon", cmd = "Harpoon" },
 
+  {
+    "RRethy/vim-illuminate",
+    event = { "CursorHold", "CursorHoldI" },
+    config = function()
+      require "custom.configs.illuminate"
+    end,
+  },
+
   { "kdheepak/lazygit.nvim", cmd = "LazyGit" },
+
+  -- code-minimap : https://github.com/wfxr/code-minimap
+  { "wfxr/minimap.vim", event = "VeryLazy" },
 
   {
     "karb94/neoscroll.nvim",
@@ -191,7 +182,38 @@ local plugins = {
     end,
   },
 
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+      { "smjonas/inc-rename.nvim", config = true },
+    },
+    config = function()
+      require "custom.configs.noice"
+    end,
+  },
+
+  {
+    "jedrzejboczar/possession.nvim",
+    cmd = { "PossessionSave", "PossessionClose", "PossessionDelete", "Telescope" },
+    config = function()
+      require "custom.configs.possession"
+    end,
+  },
+
+  { "ThePrimeagen/refactoring.nvim", cmd = "Refactor", config = true },
+
   { "petertriho/nvim-scrollbar", event = "CursorMoved", config = true },
+
+  { "simrat39/symbols-outline.nvim", cmd = "SymbolsOutline", config = true },
+
+  { "folke/todo-comments.nvim", event = "VeryLazy", config = true },
+
+  { "folke/trouble.nvim", cmd = { "TroubleToggle", "Trouble" } },
+
+  { "Pocco81/true-zen.nvim", event = "WinEnter" },
 
   -- Folds
   {
@@ -233,33 +255,9 @@ local plugins = {
     end,
   },
 
-  {
-    "jedrzejboczar/possession.nvim",
-    cmd = { "PossessionSave", "PossessionClose", "PossessionDelete", "Telescope" },
-    config = function()
-      require "custom.configs.possession"
-    end,
-  },
-
-  { "folke/todo-comments.nvim", event = "VeryLazy", config = true },
-
-  { "folke/trouble.nvim", cmd = { "TroubleToggle", "Trouble" } },
-
-  { "Pocco81/true-zen.nvim", event = "WinEnter" },
-
   { "mbbill/undotree", event = "VeryLazy", cmd = "UndotreeToggle" },
 
   { "ThePrimeagen/vim-be-good", cmd = "VimBeGood" },
-
-  { "drzel/vim-gui-zoom", cmd = { "ZoomIn", "ZoomOut" } },
-
-  {
-    "RRethy/vim-illuminate",
-    event = { "CursorHold", "CursorHoldI" },
-    config = function()
-      require "custom.configs.illuminate"
-    end,
-  },
 
   { "tpope/vim-surround", event = "VeryLazy" },
 }

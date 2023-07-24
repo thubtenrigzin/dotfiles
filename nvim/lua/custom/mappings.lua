@@ -43,7 +43,6 @@ M.disabled = {
     ["<leader>gb"] = { "" },
     ["<leader>td"] = { "" },
 
-
     -- nvimtree
     ["<C-n>"] = { "" },
     ["<leader>e"] = { "" },
@@ -73,7 +72,6 @@ M.disabled = {
     ["<C-s>"] = { "" },
     ["<leader>b"] = { "" },
     ["<leader>ch"] = { "" },
-
 
     -- LSP stuffs
     ["gD"] = { "" },
@@ -249,7 +247,6 @@ M.general = {
   },
 
   t = {                                                        -- Terminal Mode
-
   },
 
   c = {                                                         -- Command Mode
@@ -262,10 +259,7 @@ M.general = {
 ----------------------------- NvChad plugin keys -----------------------------
 
 M.blankline = {
-  --
-  -- Normal mode
-  --
-  n = {
+  n = {                                                          -- Normal Mode
     ["<leader>lc"] = {
       function()
         local ok, start = require("indent_blankline.utils").get_current_context(
@@ -282,24 +276,6 @@ M.blankline = {
     },
   },
 }
-
---[[M.comment = {
-  n = {                                                          -- Normal Mode
-    ["<A-c>"] = {
-      function()
-        require("Comment.api").toggle.linewise.current()
-      end,
-      "Toggle linewise comment",
-    },
-  },
-
-  v = {                                                          -- Visual Mode
-    ["<A-c>"] = {
-      "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
-      "Toggle linewise comment",
-    },
-  },
-}--]]
 
 M.Lazy = {
   n = {                                                          -- Normal Mode
@@ -409,9 +385,51 @@ M.nvterm = {
   },
 }
 
+M.refactoring = {
+  n = {                                                          -- Normal Mode
+    ["<A-r>i"] = { "<cmd> Refactor inline_var <CR>", "Refactor Inline Var" },
+    ["<A-r>b"] = { "<cmd> Refactor extract_block <CR>", "Refactor Extract Block" },
+    ["<A-r>bf"] = { "<cmd> Refactor extract_block_to_file <CR>", "Refactor Extract Block to File" },
+
+    ["<A-r>j"] = {
+      function()
+        require('refactoring').select_refactor()
+      end,
+      "Prompt Refactor",
+    },
+  },
+
+  v = {                                                          -- Visual Mode
+    ["<A-r>e"] = { "<cmd> Refactor extract <CR>", "Refactor extract" },
+    ["<A-r>ef"] = { "<cmd> Refactor extract_to_file <CR>", "Refactor Extract to File" },
+    ["<A-r>v"] = { "<cmd> Refactor extract_var <CR>", "Refactor Extract Var" },
+
+    ["<A-r>i"] = { "<cmd> Refactor inline_var <CR>", "Refactor Inline Var" },
+
+    ["<A-r>j"] = {
+      function()
+        require('refactoring').select_refactor()
+      end,
+      "Prompt Refactor",
+    },
+  }
+}
+
+M.rename = {
+  n = {                                                          -- Normal Mode
+    ["<leader>rn"] = {
+      function()
+        return ":IncRename " .. vim.fn.expand("<cword>")
+      end,
+      opts = { expr = true },
+      "Search and replace"
+    },
+  }
+}
+
 M.spellcheck = {
   n = {                                                          -- Normal Mode
-    ["<A-F12>"] = { "<cmd> set spell! <CR>" },
+    ["<A-F12>"] = { "<cmd> set spell! <CR>", "Toggle Spell checking" },
   },
 
   i = {                                                          -- Insert Mode
@@ -420,7 +438,7 @@ M.spellcheck = {
 }
 
 M.tabufline = {
-  n = {
+  n = {                                                          -- Normal Mode
     ["<C-Tab>"] = {
       function()
         require("nvchad_ui.tabufline").tabuflineNext()
@@ -442,7 +460,7 @@ M.tabufline = {
 }
 
 M.telescope = {
-  n = {
+  n = {                                                          -- Normal Mode
     -- Marks
     ["<leader>fm"] = { "<Cmd> Telescope marks <CR>", "Find marks" },
 
@@ -464,7 +482,7 @@ M.telescope = {
 
 ----------------------------- Other plugin keys -----------------------------
 
-M.autosave = { n = { ["<leader>as"] = { "<cmd> ASToggle <CR>", "Toggle AutoSave" } } }
+M.autosave = { n = { ["<leader>as"] = { "<cmd> AutosaveToggle <CR>", "Toggle AutoSave" } } }
 
 M.bookmark = {
   n = {                                                          -- Normal
@@ -477,18 +495,17 @@ M.bookmark = {
     ["<leader>bmk"] = { "<cmd> BookmarkMoveUp <CR>", "Move bookmark up" },
     ["<leader>bmj"] = { "<cmd> BookmarkMoveDown <CR>", "Move bookmark down" },
     ["<leader>bml"] = { "<cmd> BookmarkMoveToLine <CR>", "Move bookmark to line" },
-    --@@ ["<leader>bm"] = { "<cmd>Telescope vim_bookmarks all <CR>", " Bookmark Menu" },
   },
 }
 
-M.codeaction = {                                                          -- Normal
-  n = {
+M.codeaction = {
+  n = {                                                          -- Normal Mode
     ["<leader>la"] = { "<cmd> CodeActionMenu <CR>", "LSP code action" },
   }
 }
 
-M.dap = {                                                          -- Normal
-  n = {
+M.dap = {
+  n = {                                                          -- Normal Mode
     ["<leader>dd"] = {
       function()
         require("dap").continue()
@@ -651,7 +668,7 @@ M.harpoon = {
       end,
       "Harpoon Add file",
     },
-    --@@ ["<leader>ht"] = { "<cmd>Telescope harpoon marks<CR>", "Toggle quick menu" },
+
     ["<leader>hm"] = {
       function()
         require("harpoon.ui").toggle_quick_menu()
@@ -687,8 +704,8 @@ M.harpoon = {
 
 M.lazygit = { n = { ["<leader>gg"] = { "<cmd> LazyGit <CR>", "Lazygit" } } }
 
-M.lspsaga = {                                                          -- Normal
-  n = {
+M.lspsaga = {
+  n = {                                                          -- Normal Mode
     ["<leader>ld"] = { "<cmd> Lspsaga goto_definition <CR>", "LSP Definition" },
     ["<leader>lwd"] = { "<cmd> Lspsaga peek_definition <CR>", "LSP preview definition" },
 
@@ -706,8 +723,8 @@ M.lspsaga = {                                                          -- Normal
   }
 }
 
-M.minimap = {                                                          -- Normal
-  n = {
+M.minimap = {
+  n = {                                                          -- Normal Mode
     ["<A-c>"] = { "<Cmd> MinimapToggle <CR>", "Toggle the minimap window" },
   }
 }
@@ -813,8 +830,8 @@ M.surround = {
   }
 }
 
-M.symbolsoutline = {                                                          -- Normal Mode
-  n = {
+M.symbolsoutline = {
+  n = {                                                          -- Normal Mode
     ["<A-m>"] = { "<cmd> SymbolsOutline <CR>", "Toggle Map Symbols tree" },
   }
 }

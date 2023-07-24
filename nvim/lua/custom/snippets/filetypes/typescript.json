@@ -6,9 +6,9 @@
       "import { defineStore } from 'pinia'",
       "",
       "export const use${1}Store = defineStore('${2}', () => {",
-        "\t${0}",
-        "\treturn { }",
-        "})"
+      "\t${0}",
+      "\treturn { }",
+      "})"
     ],
     "description": "Base for Pinia file within Vue project"
   },
@@ -33,8 +33,8 @@
     "prefix": "jj_pina-function",
     "body": [          
       "function ${1}() {",
-        "\t${2}",
-        "}"
+      "\t${2}",
+      "}"
     ],
     "description": "Pinia Function"
   }

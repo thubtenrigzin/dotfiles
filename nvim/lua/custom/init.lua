@@ -1,8 +1,5 @@
--- auto commands
-require "custom.autocmd"
-
--- user custom commands
-require "custom.usrcmd"
+-- auto & usr commands
+require "custom.commands"
 
 -- neovide options
 require "custom.neovide"

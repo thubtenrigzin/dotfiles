@@ -6,6 +6,9 @@ local M = {}
 
 ---@type Base46HLGroupsList
 M.override = {
+  Normal = {
+    bg = { "black", 4},
+  },
   CursorLine = {
     bg = "black2",
   },
