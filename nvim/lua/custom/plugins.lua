@@ -13,7 +13,6 @@ FIX:
 matchup not working
 
 NOTE:
-vim-surround ou mini-surround
 command telescope not found
 change path spellcheck
 typescript.nvim vs typescript-tools
@@ -259,7 +258,7 @@ local plugins = {
 
   { "ThePrimeagen/vim-be-good", cmd = "VimBeGood" },
 
-  { "tpope/vim-surround", event = "VeryLazy" },
+  { "kylechui/nvim-surround", event = "VeryLazy", config = true },
 }
 
 return plugins
