@@ -172,6 +172,8 @@ M.general = {
 
     -- other cmds
     ["<leader>pc"] = { "<cmd> checkhealth <CR>", "Check the health of Neovim" },
+
+    ["<C-F11>"] = { "<cmd> set list! <CR>", "toggle the list characters"}
   },
 
   i = {                                                          -- Insert Mode
@@ -484,6 +486,8 @@ M.telescope = {
 
 M.autosave = { n = { ["<leader>as"] = { "<cmd> AutosaveToggle <CR>", "Toggle AutoSave" } } }
 
+M.bionic = { n = { ["<F11>"] = { "<cmd> Bionic <CR>", "Toggle Bionic reading faster" } } }
+
 M.bookmark = {
   n = {                                                          -- Normal
     ["<leader>bj"] = { "<cmd> BookmarkToggle <CR>", "Add bookmark" },
@@ -498,11 +502,7 @@ M.bookmark = {
   },
 }
 
-M.codeaction = {
-  n = {                                                          -- Normal Mode
-    ["<leader>la"] = { "<cmd> CodeActionMenu <CR>", "LSP code action" },
-  }
-}
+M.codeaction = { n = { ["<leader>la"] = { "<cmd> CodeActionMenu <CR>", "LSP code action" } } }
 
 M.codeium = {
   n = {                                                          -- Normal Mode
@@ -736,11 +736,7 @@ M.lspsaga = {
   }
 }
 
-M.minimap = {
-  n = {                                                          -- Normal Mode
-    ["<A-c>"] = { "<Cmd> MinimapToggle <CR>", "Toggle the minimap window" },
-  }
-}
+M.minimap = { n = { ["<A-c>"] = { "<Cmd> MinimapToggle <CR>", "Toggle the minimap window" } } }
 
 M.possession = {
   n = {                                                          -- Normal Mode
@@ -751,18 +747,20 @@ M.possession = {
   }
 }
 
-M.symbolsoutline = {
+M.symbolsoutline = { n = { ["<A-m>"] = { "<cmd> SymbolsOutline <CR>", "Toggle Map Symbols tree" } } }
+
+M.toggler = {
   n = {                                                          -- Normal Mode
-    ["<A-m>"] = { "<cmd> SymbolsOutline <CR>", "Toggle Map Symbols tree" },
+    ["<A-x>"] = {
+      function()
+        require("nvim-toggler").toggle()
+      end,
+      "Invert bolean or value",
+    },
   }
 }
 
-M.togglelspdiagunderline = {
-  n = {                                                          -- Normal Mode
-    -- ["<F12>"] = { "<Plug>(toggle-lsp-diag-underline) <Plug>(toggle-lsp-diag-vtext) <Esc>hh", { noremap = false } },
-    ["<F12>"] = { "<Plug>(toggle-lsp-diag-underline) <Plug>(toggle-lsp-diag-vtext) <Esc>hh", "Toggle the diagnostics" },
-  }
-}
+M.togglelspdiagunderline = { n = { ["<F12>"] = { "<Plug>(toggle-lsp-diag-underline) <Plug>(toggle-lsp-diag-vtext) <Esc>hh", "Toggle the diagnostics" } } }
 
 M.trouble = {
   n = {                                                          -- Normal Mode

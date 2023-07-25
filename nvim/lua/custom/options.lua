@@ -23,6 +23,9 @@ opt.updatetime = 100
 
 opt.clipboard = ""
 
+opt.list = false
+opt.listchars = { space = "_", tab = ">~", eol = "↵" }
+
 --
 -- Spellcheck
 --

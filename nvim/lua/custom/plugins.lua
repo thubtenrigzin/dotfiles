@@ -1,5 +1,7 @@
 --[[
 TODO:
+searchbox and co
+sidebar
 lspsaga full setup in file
 ZEN <- event vimEnter vs BufWinEnter
 null-ls config file
@@ -8,6 +10,7 @@ blankline config
 trouble config file
 cmp + codium + tabnine
 noice config file
+mini other tools
 
 FIX:
 matchup not working
@@ -40,12 +43,7 @@ local plugins = {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      {
-        "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim",
-        config = function()
-          require "custom.configs.toggle-lsp-diag"
-        end,
-      },
+      { "smjonas/inc-rename.nvim", config = true },
 
       {
         "jose-elias-alvarez/null-ls.nvim",
@@ -57,6 +55,13 @@ local plugins = {
       { "glepnir//lspsaga.nvim", config = true },
 
       "b0o/SchemaStore.nvim", -- https://www.schemastore.org/json/
+
+      {
+        "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim",
+        config = function()
+          require "custom.configs.toggle-lsp-diag"
+        end,
+      },
     },
     config = function()
       require "plugins.configs.lspconfig"
@@ -112,6 +117,8 @@ local plugins = {
       require "custom.configs.bookmarks"
     end,
   },
+
+  { "HampusHauffman/bionic.nvim", cmd = { "Bionic" } },
 
   {
     "weilbith/nvim-code-action-menu",
@@ -176,21 +183,16 @@ local plugins = {
 
   { "kdheepak/lazygit.nvim", cmd = "LazyGit" },
 
-  -- code-minimap : https://github.com/wfxr/code-minimap
-  { "wfxr/minimap.vim", event = "VeryLazy" },
-
   {
-    "karb94/neoscroll.nvim",
-    keys = { "<C-d>", "<C-u>" },
+    "echasnovski/mini.nvim",
+    event = "VeryLazy",
     config = function()
-      require("neoscroll").setup {
-        mappings = {
-          "<C-u>",
-          "<C-d>",
-        }
-      }
+      require "custom.configs.mini"
     end,
   },
+
+  -- code-minimap : https://github.com/wfxr/code-minimap
+  { "wfxr/minimap.vim", event = "VeryLazy" },
 
   {
     "folke/noice.nvim",
@@ -198,7 +200,7 @@ local plugins = {
     dependencies = {
       "MunifTanjim/nui.nvim",
       "rcarriga/nvim-notify",
-      { "smjonas/inc-rename.nvim", config = true },
+      "VonHeikemen/searchbox.nvim",
     },
     config = function()
       require "custom.configs.noice"
@@ -220,6 +222,14 @@ local plugins = {
   { "simrat39/symbols-outline.nvim", cmd = "SymbolsOutline", config = true },
 
   { "folke/todo-comments.nvim", event = "VeryLazy", config = true },
+
+  {
+    "nguyenvukhang/nvim-toggler",
+    event = "VeryLazy",
+    config = function()
+      require "custom.configs.toggler"
+    end,
+  },
 
   { "folke/trouble.nvim", cmd = { "TroubleToggle", "Trouble" } },
 
