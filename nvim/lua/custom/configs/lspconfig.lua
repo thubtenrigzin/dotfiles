@@ -10,7 +10,7 @@ local servers = { "html", "cssls", "tsserver", "pyright", "gopls", "jsonls" }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
-    capabilities = capabilities
+    capabilities = capabilities,
   }
 end
 
@@ -65,3 +65,12 @@ lspconfig.emmet_ls.setup {
     },
   }
 }
+
+--
+-- Vue
+--
+lspconfig.volar.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+

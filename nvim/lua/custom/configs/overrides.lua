@@ -7,6 +7,8 @@ M.cmp = {
   sources = {
     { name = "luasnip" },
     { name = "nvim_lsp" },
+    { name = 'nvim_lsp_document_symbol' },
+    { name = "nvim_lsp_signature_help" },
     { name = "buffer", keyword_length = 3 },
     { name = "nvim_lua" },
     { name = "path" },
@@ -23,6 +25,12 @@ M.cmp = {
   },
 }
 
+M.colorizer = {
+  user_default_options = {
+    names = false,
+  },
+}
+
 M.mason = {
   ensure_installed = {
     -- lua stuff
@@ -34,8 +42,9 @@ M.mason = {
     "html-lsp",
     "json-lsp",
     "typescript-language-server",
-    --"vue-language-server",
+    "vue-language-server",
 
+    -- Formating
     "deno",
     "prettier",
 

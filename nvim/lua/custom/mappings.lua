@@ -213,8 +213,8 @@ M.general = {
     ["à"] = { "^", "Go to the first word of the line" },
 
     -- Move lines
-    ["<a-k>"] = { ":m '<-2<CR>gv=gv", "Slide up" },
-    ["<a-j>"] = { ":m '>+1<CR>gv=gv", "Slide down" },
+    ["<a-k>"] = { ":m '<-2<CR>gv=gv", opts = { silent = true }, "Slide up" },
+    ["<a-j>"] = { ":m '>+1<CR>gv=gv", opts = { silent = true }, "Slide down" },
 
     -- Super double clipboard
     ["<A-d>"] = { '"_d', "Delete without yanking" },
@@ -736,7 +736,7 @@ M.lspsaga = {
   }
 }
 
-M.minimap = { n = { ["<A-c>"] = { "<Cmd> MinimapToggle <CR>", "Toggle the minimap window" } } }
+M.minimap = { n = { ["<A-l>m"] = { "<Cmd> MinimapToggle <CR>", "Toggle the minimap window" } } }
 
 M.possession = {
   n = {                                                          -- Normal Mode
@@ -747,7 +747,13 @@ M.possession = {
   }
 }
 
-M.symbolsoutline = { n = { ["<A-m>"] = { "<cmd> SymbolsOutline <CR>", "Toggle Map Symbols tree" } } }
+M.sidebar = {
+  n = {                                                          -- Normal Mode
+    ["<A-h>s"] = { "<cmd> SidebarNvimToggle <CR>", "Toggle the sidebar" },
+  }
+}
+
+M.symbolsoutline = { n = { ["<A-l>s"] = { "<cmd> SymbolsOutline <CR>", "Toggle Map Symbols tree" } } }
 
 M.toggler = {
   n = {                                                          -- Normal Mode
@@ -765,15 +771,13 @@ M.togglelspdiagunderline = { n = { ["<F12>"] = { "<Plug>(toggle-lsp-diag-underli
 M.trouble = {
   n = {                                                          -- Normal Mode
     ["<leader>lr"] = { "<cmd> TroubleToggle lsp_references <CR>", "LSP References" },
-
     ["<leader>li"] = { "<cmd> TroubleToggle lsp_implementations <CR>", "LSP Implementation" },
 
-    ["<leader>lx"] = { "<cmd> TroubleToggle document_diagnostics <CR>", "LSP Document Diagnostics" },
-    ["<leader>lWx"] = { "<cmd> TroubleToggle workspace_diagnostics <CR>", "LSP Workspace Diagnostics" },
-
     ["<leader>ll"] = { "<cmd> TroubleToggle loclist <CR>", "Loclist" },
-
     ["<leader>lq"] = { "<cmd> TroubleToggle quickfix <CR>", "Quickfix list" },
+
+    ["<leader>lWx"] = { "<cmd> TroubleToggle workspace_diagnostics <CR>", "LSP Workspace Diagnostics" },
+    ["<A-j>x"] = { "<cmd> TroubleToggle document_diagnostics <CR>", "LSP Document Diagnostics" },
   }
 }
 

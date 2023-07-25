@@ -9,6 +9,7 @@ toggler.setup {
     ["vim"] = "emacs",
     ["True"] = "False",
     ["ON"] = "OFF",
+    ["0"] = "1",
   },
 
   remove_default_keybinds = true,

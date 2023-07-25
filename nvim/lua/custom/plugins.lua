@@ -8,12 +8,14 @@ null-ls config file
 telescope config
 blankline config
 trouble config file
-cmp + codium + tabnine
+cmp change name description "text" 
 noice config file
-mini other tools
 
 FIX:
 matchup not working
+
+BUG:
+double signature
 
 NOTE:
 command telescope not found
@@ -34,10 +36,17 @@ local plugins = {
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
+      "hrsh7th/cmp-nvim-lsp-document-symbol",
       "hrsh7th/cmp-emoji",
+      "hrsh7th/cmp-nvim-lsp-signature-help",
       "f3fora/cmp-spell",
     },
     opts = overrides.cmp,
+  },
+
+  {
+    "NvChad/nvim-colorizer.lua",
+    opts = overrides.colorizer,
   },
 
   {
@@ -139,7 +148,6 @@ local plugins = {
   --
   -- DAP
   --
-
   {
     "mfussenegger/nvim-dap",
     dependencies = {
@@ -173,13 +181,13 @@ local plugins = {
 
   { "ThePrimeagen/harpoon", cmd = "Harpoon" },
 
-  {
+  --[[{
     "RRethy/vim-illuminate",
     event = { "CursorHold", "CursorHoldI" },
     config = function()
       require "custom.configs.illuminate"
     end,
-  },
+  },]]
 
   { "kdheepak/lazygit.nvim", cmd = "LazyGit" },
 
@@ -216,6 +224,15 @@ local plugins = {
   },
 
   { "ThePrimeagen/refactoring.nvim", cmd = "Refactor", config = true },
+
+  {
+    "sidebar-nvim/sidebar.nvim",
+    cmd = "SidebarNvimToggle",
+    dependencies = "sidebar-nvim/sections-dap",
+    config = function()
+      require "custom.configs.sidebar"
+    end,
+  },
 
   { "petertriho/nvim-scrollbar", event = "CursorMoved", config = true },
 
@@ -258,7 +275,7 @@ local plugins = {
 
       {
         "anuvyklack/fold-preview.nvim",
-        dependencies = { "anuvyklack/keymap-amend.nvim" },
+        dependencies = "anuvyklack/keymap-amend.nvim",
         opts = {
           border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
         },
