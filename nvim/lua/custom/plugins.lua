@@ -31,8 +31,6 @@ local plugins = {
 
   --------------------------- NvChad default plugins ---------------------------
 
-  --{ "lukas-reineke/indent-blankline.nvim", opts = overrides.blankline },
-
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
@@ -61,7 +59,12 @@ local plugins = {
         end,
       },
 
-      { "glepnir//lspsaga.nvim", config = true },
+      {
+        "glepnir//lspsaga.nvim",
+        config = function()
+          require "custom.configs.lspsaga"
+        end,
+      },
 
       "b0o/SchemaStore.nvim", -- https://www.schemastore.org/json/
 
@@ -88,7 +91,7 @@ local plugins = {
     "nvim-treesitter/nvim-treesitter",
     dependencies = {
       "windwp/nvim-ts-autotag",
-      "HiPhish/nvim-ts-rainbow2",
+      "hiphish/rainbow-delimiters.nvim",
 
       {
         "JoosepAlviste/nvim-ts-context-commentstring",
@@ -161,6 +164,12 @@ local plugins = {
     end,
   },
 
+  {
+    "Bekaboo/dropbar.nvim",
+    event = "VeryLazy",
+    config = true
+  },
+
   -- Go
   {
     "leoluz/nvim-dap-go",
@@ -180,14 +189,6 @@ local plugins = {
   { "drzel/vim-gui-zoom", cmd = { "ZoomIn", "ZoomOut" } },
 
   { "ThePrimeagen/harpoon", cmd = "Harpoon" },
-
-  --[[{
-    "RRethy/vim-illuminate",
-    event = { "CursorHold", "CursorHoldI" },
-    config = function()
-      require "custom.configs.illuminate"
-    end,
-  },]]
 
   { "kdheepak/lazygit.nvim", cmd = "LazyGit" },
 

@@ -157,19 +157,6 @@ M.treesitter = {
       "python",
     },
   },
-
-  rainbow = {
-    enable = true,
-    --extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
-    --max_file_lines = nil,
-    --query = {
-    --  "rainbow-parens",
-    --  html = "rainbow-tags",
-    --},
-    -- colors = {}, -- table of hex strings
-    -- termcolors = {} -- table of colour name strings
-    -- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
-  }
 }
 
 return M

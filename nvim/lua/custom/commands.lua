@@ -72,9 +72,9 @@ create_cmd("CodeiumToggle", function()
     on_open = function()
       g.codeium = not g.codeium
       if g.codeium then
-        vim.cmd "CodeiumEnable"
+        cmd "CodeiumEnable"
       else
-        vim.cmd "CodeiumDisable"
+        cmd "CodeiumDisable"
       end
     end
   })
