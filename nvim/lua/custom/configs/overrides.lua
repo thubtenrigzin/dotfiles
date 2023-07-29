@@ -6,6 +6,7 @@ local M = {}
 M.cmp = {
   sources = {
     { name = "luasnip" },
+    { name = 'treesitter' },
     { name = "nvim_lsp" },
     { name = 'nvim_lsp_document_symbol' },
     { name = "nvim_lsp_signature_help" },
@@ -30,6 +31,66 @@ M.colorizer = {
     names = false,
   },
 }
+
+--[[M.devicons = {
+  override_by_filename = {
+    ["makefile"] = {
+      icon = "",
+      color = "#f1502f",
+      name = "Makefile",
+    },
+    ["mod"] = {
+      icon = "󰟓",
+      color = "#519aba",
+      name = "Mod",
+    },
+    ["sum"] = {
+      icon = "󰟓",
+      color = "#cbcb40",
+      cterm_color = "185",
+      name = "Sum",
+    },
+    [".gitignore"] = {
+      icon = "",
+      color = "#e24329",
+      cterm_color = "196",
+      name = "GitIgnore",
+    },
+    ["js"] = {
+      icon = "",
+      color = "#cbcb41",
+      cterm_color = "185",
+      name = "Js",
+    },
+    ["lock"] = {
+      icon = "",
+      color = "#bbbbbb",
+      cterm_color = "250",
+      name = "Lock",
+    },
+    ["package.json"] = {
+      icon = "",
+      color = "#e8274b",
+      name = "PackageJson",
+    },
+    [".eslintignore"] = {
+      icon = "󰱺",
+      color = "#e8274b",
+      name = "EslintIgnore",
+    },
+    ["tags"] = {
+      icon = "",
+      color = "#bbbbbb",
+      cterm_color = "250",
+      name = "Tags",
+    },
+    ["http"] = {
+      icon = "󰖟",
+      color = "#519aba",
+      name = "Http",
+    },
+  },
+}--]]
 
 M.mason = {
   ensure_installed = {
@@ -119,6 +180,17 @@ M.nvterm = {
       vertical = { location = "leftabove", split_ratio = 0.5 },
     },
   }
+}
+
+M.telescope = {
+  --[[extensions = {
+    fzf = {
+      fuzzy = true,
+      override_generic_sorter = true,
+      override_file_sorter = true,
+      case_mode = "smart_case",
+    }
+  }--]]
 }
 
 M.treesitter = {

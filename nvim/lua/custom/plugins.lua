@@ -3,24 +3,24 @@ TODO:
 searchbox and co
 sidebar
 lspsaga full setup in file
-ZEN <- event vimEnter vs BufWinEnter
 null-ls config file
 telescope config
-blankline config
 trouble config file
-cmp change name description "text" 
 noice config file
+hlchunk config file
+devicon see override config
 
 FIX:
 matchup not working
 
 BUG:
-double signature
+telescope fzf
 
 NOTE:
 command telescope not found
 change path spellcheck
 typescript.nvim vs typescript-tools
+see test files programming
 --]]
 
 ---@type NvPluginSpec[]
@@ -38,14 +38,14 @@ local plugins = {
       "hrsh7th/cmp-emoji",
       "hrsh7th/cmp-nvim-lsp-signature-help",
       "f3fora/cmp-spell",
+      "ray-x/cmp-treesitter",
     },
     opts = overrides.cmp,
   },
 
-  {
-    "NvChad/nvim-colorizer.lua",
-    opts = overrides.colorizer,
-  },
+  { "NvChad/nvim-colorizer.lua", opts = overrides.colorizer },
+
+  --{ "nvim-tree/nvim-web-devicons", opts = overrides.devicons },
 
   {
     "neovim/nvim-lspconfig",
@@ -108,7 +108,20 @@ local plugins = {
     end,
   },
 
-  --{ "nvim-telescope/telescope.nvim", opts = overrides.telescope },
+  {
+    "nvim-telescope/telescope.nvim",
+    dependencies = {
+      "debugloop/telescope-undo.nvim",
+      "tom-anders/telescope-vim-bookmarks.nvim",
+      "nvim-telescope/telescope-dap.nvim",
+      --{ "nvim-telescope/telescope-fzf-native.nvim", build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build" },
+    },
+    opts = overrides.telescope,
+    config = function()
+      require("telescope").load_extension("undo")
+      --require('telescope').load_extension('fzf')
+    end
+  },
 
   {
     "folke/which-key.nvim",
@@ -148,6 +161,12 @@ local plugins = {
     end
   },
 
+  {
+    "nvim-zh/colorful-winsep.nvim",
+    event = "WinNew",
+    config = true,
+  },
+
   --
   -- DAP
   --
@@ -167,7 +186,9 @@ local plugins = {
   {
     "Bekaboo/dropbar.nvim",
     event = "VeryLazy",
-    config = true
+    config = function()
+      require "custom.configs.dropbar"
+    end,
   },
 
   -- Go
@@ -189,6 +210,17 @@ local plugins = {
   { "drzel/vim-gui-zoom", cmd = { "ZoomIn", "ZoomOut" } },
 
   { "ThePrimeagen/harpoon", cmd = "Harpoon" },
+
+  { "shellRaining/hlchunk.nvim", event = "VeryLazy", config = true},
+
+  {
+    "ziontee113/icon-picker.nvim",
+    cmd = "IconPickerNormal",
+    dependencies = "stevearc/dressing.nvim",
+    config = function()
+      require "custom.configs.iconpicker"
+    end,
+  },
 
   { "kdheepak/lazygit.nvim", cmd = "LazyGit" },
 
@@ -237,6 +269,8 @@ local plugins = {
 
   { "petertriho/nvim-scrollbar", event = "CursorMoved", config = true },
 
+  { "nvim-pack/nvim-spectre", event = "VeryLazy" },
+
   { "simrat39/symbols-outline.nvim", cmd = "SymbolsOutline", config = true },
 
   { "folke/todo-comments.nvim", event = "VeryLazy", config = true },
@@ -251,11 +285,13 @@ local plugins = {
 
   { "folke/trouble.nvim", cmd = { "TroubleToggle", "Trouble" } },
 
-  { "Pocco81/true-zen.nvim", event = "WinEnter" },
+  { "Pocco81/true-zen.nvim", event = "WinNew" },
 
   -- Folds
   {
     "kevinhwang91/nvim-ufo",
+    event = "BufReadPost",
+    keys = { "zf", "zo", "za", "zc", "zM", "zR" },
     dependencies = {
       "kevinhwang91/promise-async",
 
@@ -282,8 +318,6 @@ local plugins = {
         },
       },
     },
-    event = "BufReadPost",
-    keys = { "zf", "zo", "za", "zc", "zM", "zR" },
     config = function()
       require("ufo").setup {
         provider_selector = function()

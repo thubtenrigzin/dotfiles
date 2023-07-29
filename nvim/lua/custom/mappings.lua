@@ -40,7 +40,6 @@ M.disabled = {
     ["]c"] = { "" },
     ["<leader>rh"] = { "" },
     ["<leader>ph"] = { "" },
-    ["<leader>gb"] = { "" },
     ["<leader>td"] = { "" },
 
     -- nvimtree
@@ -122,7 +121,7 @@ M.general = {
     -- Use both hands for }
     ["<C-A-=>"] = { "}", "Go to the next paragraph" },
 
-    -- Keep the curson at the same position
+    -- Keep the cursor at the same position
     ["y0"] = { "mzy0`z", "Yank to the begining of the line" },
     ["y<Home>"] = { "mzy<Home>`z", "Yank to the end of the line" },
     ["y("] = { "mzy(`z", "Yank to the next paragraph" },
@@ -479,6 +478,22 @@ M.telescope = {
     ["<leader>ft"] = { "<cmd> Telescope terms <CR>", "Pick an hidden term" },
 
     ["<leader>fT"] = { "<cmd> Telescope themes <CR>", "NvChad themes" },
+
+    -- undo
+    ["<leader>fu"] = { '<cmd> Telescope undo <CR>', "Find in undo tree" },
+
+    -- bookmarks
+    ["<leader>fB"] = { '<cmd> Telescope vim_bookmarks all <CR>', "Find bookmarks" },
+
+    -- dap
+    ["<leader>fdc"] = { '<cmd> Telescope dap commands <CR>', "Find dap commands" },
+    ["<leader>fdC"] = { '<cmd> Telescope dap configuration <CR>', "Find dap configuration" },
+    ["<leader>fdb"] = { '<cmd> Telescope dap list_breakpoints <CR>', "Find dap breakpoints" },
+    ["<leader>fdv"] = { '<cmd> Telescope dap variables <CR>', "Find dap variables" },
+    ["<leader>fdf"] = { '<cmd> Telescope dap frames <CR>', "Find dap frames" },
+
+    -- possession
+    ["<leader>fS"] = { "<Cmd> Telescope Possession list <CR>", "List all the sessions" },
   },
 }
 
@@ -715,6 +730,12 @@ M.harpoon = {
   },
 }
 
+M.iconpicker = {
+  n = {                                                          -- Normal Mode
+    ["<leader>:"] = { "<cmd> IconPickerNormal <CR>", "Pick an icon" },
+  }
+}
+
 M.lazygit = { n = { ["<leader>gg"] = { "<cmd> LazyGit <CR>", "Lazygit" } } }
 
 M.lspsaga = {
@@ -741,7 +762,6 @@ M.minimap = { n = { ["<A-l>m"] = { "<Cmd> MinimapToggle <CR>", "Toggle the minim
 M.possession = {
   n = {                                                          -- Normal Mode
     ["<leader>Ss"] = { ":PossessionSave ", "Save the session as..." },
-    ["<leader>Sl"] = { "<Cmd> Telescope Possession list <CR>", "List all the sessions" },
     ["<leader>Sc"] = { "<Cmd> PossessionClose <CR>", "Close the current session" },
     ["<leader>Sd"] = { "<Cmd> PossessionDelete <CR>", "Delete the current session" },
   }
@@ -750,6 +770,17 @@ M.possession = {
 M.sidebar = {
   n = {                                                          -- Normal Mode
     ["<A-h>s"] = { "<cmd> SidebarNvimToggle <CR>", "Toggle the sidebar" },
+  }
+}
+
+M.spectre = {
+  n = {                                                          -- Normal Mode
+    ["<A-s>"] = {
+      function()
+        require("spectre").toggle()
+      end,
+      "Toggle the search panel"
+    }
   }
 }
 
@@ -767,6 +798,17 @@ M.toggler = {
 }
 
 M.togglelspdiagunderline = { n = { ["<F12>"] = { "<Plug>(toggle-lsp-diag-underline) <Plug>(toggle-lsp-diag-vtext) <Esc>hh", "Toggle the diagnostics" } } }
+
+M.dropbar = {
+  n = {                                                          -- Normal Mode
+    ["<A-k>o"] = {
+      function()
+        require('dropbar.api').pick()
+      end,
+      "Navigate into the dropbar menu",
+    }
+  }
+}
 
 M.trouble = {
   n = {                                                          -- Normal Mode
