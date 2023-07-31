@@ -759,6 +759,8 @@ M.lspsaga = {
 
 M.minimap = { n = { ["<A-l>m"] = { "<Cmd> MinimapToggle <CR>", "Toggle the minimap window" } } }
 
+M.muren = { n = { ["<A-s>m"] = { "<cmd> MurenToggle <CR>", "Toggle Muren search window" } } }
+
 M.possession = {
   n = {                                                          -- Normal Mode
     ["<leader>Ss"] = { ":PossessionSave ", "Save the session as..." },
@@ -767,22 +769,18 @@ M.possession = {
   }
 }
 
-M.sidebar = {
-  n = {                                                          -- Normal Mode
-    ["<A-h>s"] = { "<cmd> SidebarNvimToggle <CR>", "Toggle the sidebar" },
-  }
-}
+M.sidebar = { n = { ["<A-h>s"] = { "<cmd> SidebarNvimToggle <CR>", "Toggle the sidebar" } } }
 
-M.spectre = {
+--[[M.spectre = {
   n = {                                                          -- Normal Mode
-    ["<A-s>"] = {
+    ["<A-s>p"] = {
       function()
         require("spectre").toggle()
       end,
       "Toggle the search panel"
     }
   }
-}
+}--]]
 
 M.symbolsoutline = { n = { ["<A-l>s"] = { "<cmd> SymbolsOutline <CR>", "Toggle Map Symbols tree" } } }
 

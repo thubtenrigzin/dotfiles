@@ -1,5 +1,4 @@
 local opt = vim.opt
-local g = vim.g
 
 opt.tabstop = 2
 opt.softtabstop = 2
@@ -48,6 +47,3 @@ opt.foldnestmax = 1
 opt.foldlevelstart = 99
 opt.foldenable = true
 opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
-
--- snippets path
-g.vscode_snippets_path = vim.fn.stdpath "config" .. "\\lua\\custom\\snippets"

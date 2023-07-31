@@ -92,6 +92,10 @@ M.colorizer = {
   },
 }--]]
 
+M.luasnip = {
+  require("luasnip.loaders.from_vscode").load({ paths = { vim.fn.stdpath "config" .. "\\lua\\custom\\snippets" } })
+}
+
 M.mason = {
   ensure_installed = {
     -- lua stuff

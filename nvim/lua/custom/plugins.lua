@@ -1,6 +1,5 @@
 --[[
 TODO:
-searchbox and co
 sidebar
 lspsaga full setup in file
 null-ls config file
@@ -50,8 +49,6 @@ local plugins = {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      { "smjonas/inc-rename.nvim", config = true },
-
       {
         "jose-elias-alvarez/null-ls.nvim",
         config = function()
@@ -80,6 +77,8 @@ local plugins = {
       require "custom.configs.lspconfig"
     end,
   },
+
+  { "saadparwaiz1/cmp_luasnip",	opts = overrides.luasnip },
 
   { "williamboman/mason.nvim", opts = overrides.mason },
 
@@ -236,12 +235,17 @@ local plugins = {
   { "wfxr/minimap.vim", event = "VeryLazy" },
 
   {
+    "AckslD/muren.nvim",
+    cmd = "MurenToggle",
+    config = true,
+  },
+
+  {
     "folke/noice.nvim",
     event = "VeryLazy",
     dependencies = {
       "MunifTanjim/nui.nvim",
       "rcarriga/nvim-notify",
-      "VonHeikemen/searchbox.nvim",
     },
     config = function()
       require "custom.configs.noice"
@@ -269,7 +273,7 @@ local plugins = {
 
   { "petertriho/nvim-scrollbar", event = "CursorMoved", config = true },
 
-  { "nvim-pack/nvim-spectre", event = "VeryLazy" },
+  --{ "nvim-pack/nvim-spectre", event = "VeryLazy" },
 
   { "simrat39/symbols-outline.nvim", cmd = "SymbolsOutline", config = true },
 
@@ -327,7 +331,7 @@ local plugins = {
     end,
   },
 
-  { "mbbill/undotree", event = "VeryLazy", cmd = "UndotreeToggle" },
+  { "mbbill/undotree", cmd = "UndotreeToggle" },
 
   { "ThePrimeagen/vim-be-good", cmd = "VimBeGood" },
 
