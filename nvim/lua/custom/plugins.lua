@@ -263,7 +263,6 @@ local plugins = {
     "jedrzejboczar/possession.nvim",
     cmd = { "PossessionSave", "PossessionClose", "PossessionDelete" },
     config = function()
-      require('telescope').load_extension('possession')
       require "custom.configs.possession"
     end,
   },

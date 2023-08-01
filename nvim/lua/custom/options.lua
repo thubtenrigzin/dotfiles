@@ -11,6 +11,7 @@ opt.iskeyword:append("-")
 
 opt.rnu = true
 opt.scrolloff = 8
+opt.textwidth = 80
 opt.wrap = false
 opt.colorcolumn = "80"
 

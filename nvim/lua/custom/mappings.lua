@@ -169,7 +169,11 @@ M.general = {
     -- other cmds
     ["<leader>pc"] = { "<cmd> checkhealth <CR>", "Check the health of Neovim" },
 
-    ["<C-F11>"] = { "<cmd> set list! <CR>", "toggle the list characters"}
+    -- display special characters marks
+    ["<C-F11>"] = { "<cmd> set list! <CR>", "toggle the list characters" },
+
+    -- wrapping & autoformat
+    ["<F9>"] = { "mzgg0gqG`z <cmd> set fo+=a <CR>", "toggle the characters wrapping" },
   },
 
   i = {                                                          -- Insert Mode
