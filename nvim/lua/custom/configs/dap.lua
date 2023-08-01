@@ -21,7 +21,7 @@ vim.fn.sign_define('DapBreakpointRejected', {text='⬜', texthl='', linehl='', n
 
 -- UI Setup
 --
-dapui.setup({
+dapui.setup{
   layouts = {
     {
       elements = {
@@ -44,7 +44,7 @@ dapui.setup({
       position = "bottom",
     },
   },
-})
+}
 
 -- Adapter for C & C++
 --
@@ -98,6 +98,7 @@ for _, language in ipairs({ 'typescript', 'javascript' }) do
       type = 'node2',
       request = 'launch',
       program = '${file}',
+      -- preLaunchTask = "tsc build - tsconfig.json",
       cwd = vim.fn.getcwd(),
       sourceMaps = true,
       protocol = 'inspector',

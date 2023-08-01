@@ -3,8 +3,8 @@ local M = {}
 local highlights = require "custom.highlights"
 
 M.ui = {
-  theme = "tokyonight",
-  theme_toggle = { "tokyonight", "tokyonight_light" },
+  theme = "gruvbox",
+  theme_toggle = { "gruvbox", "gruvbox_light" },
 
   lsp = { signature = { disabled = true} },
 
@@ -40,12 +40,13 @@ M.ui = {
     },
 
     buttons = {
-      { "  Find File", "Spc f f", "Telescope find_files" },
-      { "󰈚  Recent Files", "Spc f o", "Telescope oldfiles" },
-      { "󰈭  Find Word", "Spc f w", "Telescope live_grep" },
-      { "  Bookmarks", "Spc m a", "Telescope marks" },
-      { "  Themes", "Spc t h", "Telescope themes" },
-      { "  Mappings", "Spc c h", "NvCheatsheet" },
+      { "  Find File", "<space>ff", "Telescope find_files" },
+      { "󰈚  Recent Files", "<space>fo", "Telescope oldfiles" },
+      { "󰈭  Find Word", "<space>fw", "Telescope live_grep" },
+      { "  Bookmarks", "<space>fm", "Telescope marks" },
+      { "  Sessions", "<space>fS", "Telescope possession list" },
+      { "  Themes", "<space>ft", "Telescope themes" },
+      { "  Mappings", "<space>fk", "NvCheatsheet" },
     },
   },
 }

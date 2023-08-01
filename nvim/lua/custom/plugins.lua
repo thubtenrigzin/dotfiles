@@ -78,7 +78,7 @@ local plugins = {
     end,
   },
 
-  { "saadparwaiz1/cmp_luasnip",	opts = overrides.luasnip },
+  { "L3MON4D3/LuaSnip",	opts = overrides.luasnip },
 
   { "williamboman/mason.nvim", opts = overrides.mason },
 
@@ -110,24 +110,25 @@ local plugins = {
   {
     "nvim-telescope/telescope.nvim",
     dependencies = {
-      "debugloop/telescope-undo.nvim",
       "tom-anders/telescope-vim-bookmarks.nvim",
       "nvim-telescope/telescope-dap.nvim",
+
+      {
+        "debugloop/telescope-undo.nvim",
+        config = function()
+          require("telescope").load_extension("undo")
+        end,
+      },
       --{ "nvim-telescope/telescope-fzf-native.nvim", build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build" },
     },
-    opts = overrides.telescope,
-    config = function()
-      require("telescope").load_extension("undo")
-      --require('telescope').load_extension('fzf')
-    end
+    --opts = overrides.telescope,
   },
 
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
-    config = function(_, opts)
+    config = function()
       dofile(vim.g.base46_cache .. "whichkey")
-      require("which-key").setup(opts)
       require "custom.configs.whichkey"
     end,
   },
@@ -210,7 +211,13 @@ local plugins = {
 
   { "ThePrimeagen/harpoon", cmd = "Harpoon" },
 
-  { "shellRaining/hlchunk.nvim", event = "VeryLazy", config = true},
+  {
+    "shellRaining/hlchunk.nvim",
+    event = "VeryLazy",
+    config = function()
+      require "custom.configs.hlchunk"
+    end,
+  },
 
   {
     "ziontee113/icon-picker.nvim",
@@ -254,8 +261,9 @@ local plugins = {
 
   {
     "jedrzejboczar/possession.nvim",
-    cmd = { "PossessionSave", "PossessionClose", "PossessionDelete", "Telescope" },
+    cmd = { "PossessionSave", "PossessionClose", "PossessionDelete" },
     config = function()
+      require('telescope').load_extension('possession')
       require "custom.configs.possession"
     end,
   },
@@ -272,8 +280,6 @@ local plugins = {
   },
 
   { "petertriho/nvim-scrollbar", event = "CursorMoved", config = true },
-
-  --{ "nvim-pack/nvim-spectre", event = "VeryLazy" },
 
   { "simrat39/symbols-outline.nvim", cmd = "SymbolsOutline", config = true },
 

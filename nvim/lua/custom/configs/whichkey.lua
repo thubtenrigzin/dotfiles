@@ -4,12 +4,11 @@ if not present then
   return
 end
 
-wk.register( {
-  -- add group
+wk.register{
   ["<leader>"] = {
     l = {name="+LSP"},
     p = {name="+Packer"},
     s = {name="+Surround"},
     w = {name="+WhichKey"},
   }
-})
+}

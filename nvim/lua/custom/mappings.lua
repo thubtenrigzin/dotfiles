@@ -130,9 +130,6 @@ M.general = {
     -- Keep all in center
     ["J"] = { "mzJ`z", "Merge 2 lines together and add space" },
     ["gJ"] = { "mzgJ`z", "Merge 2 lines together" },
-    --
-    --["<C-d>"] = { "<C-d>zz", "Scroll down and keep to the middle" },
-    --["<C-u>"] = { "<C-u>zz", "Scroll up and keep to the middle" },
 
     ["n"] = { "nzzzv", "Seach next and keep to the middle" },
     ["N"] = { "Nzzzv", "Search previous and keep to the middle" },
@@ -280,8 +277,8 @@ M.blankline = {
 
 M.Lazy = {
   n = {                                                          -- Normal Mode
-    ["<leader>ps"] = { "<cmd>Lazy sync<cr>", "Packager sync" },
-    ["<leader>pp"] = { "<cmd>Lazy <cr>", "Packager Profile" },
+    ["<leader>ps"] = { "<cmd> Lazy sync <CR>", "Packager sync" },
+    ["<leader>pp"] = { "<cmd> Lazy <CR>", "Packager Profile" },
   },
 }
 
@@ -416,18 +413,6 @@ M.refactoring = {
   }
 }
 
-M.rename = {
-  n = {                                                          -- Normal Mode
-    ["<leader>rn"] = {
-      function()
-        return ":IncRename " .. vim.fn.expand("<cword>")
-      end,
-      opts = { expr = true },
-      "Search and replace"
-    },
-  }
-}
-
 M.spellcheck = {
   n = {                                                          -- Normal Mode
     ["<A-F12>"] = { "<cmd> set spell! <CR>", "Toggle Spell checking" },
@@ -454,9 +439,7 @@ M.tabufline = {
       "Close the current buffer",
     },
 
-    ["<leader><C-S-Tab>"] = { "<Cmd>tabnew <CR>", "Create a new Tab" },
-    ["<leader><C-Tab>"] = { "<Cmd>tabn <CR>", "Go to the next Tab" },
-    ["<leader><S-Tab>"] = { "<Cmd>tabp <CR>", "Go to the previous Tab" },
+    ["<leader><C-S-Tab>"] = { "<cmd> tabnew <CR>", "Create a new Tab" },
   },
 }
 
@@ -475,9 +458,10 @@ M.telescope = {
     ["<leader>fi"] = { "<cmd> Telescope lsp_implementations <CR>", "Find lsp implementations" },
 
     -- pick a hidden term
-    ["<leader>ft"] = { "<cmd> Telescope terms <CR>", "Pick an hidden term" },
+    ["<leader>fT"] = { "<cmd> Telescope terms <CR>", "Pick an hidden term" },
 
-    ["<leader>fT"] = { "<cmd> Telescope themes <CR>", "NvChad themes" },
+    -- pick a NvChad theme
+    ["<leader>ft"] = { "<cmd> Telescope themes <CR>", "NvChad themes" },
 
     -- undo
     ["<leader>fu"] = { '<cmd> Telescope undo <CR>', "Find in undo tree" },
@@ -746,7 +730,7 @@ M.lspsaga = {
     ["<leader>lt"] = { "<cmd> Lspsaga goto_type_definition <CR>", "LSP Definition" },
     ["<leader>lwt"] = { "<cmd> Lspsaga peek_type_definition <CR>", "LSP preview type definition" },
 
-    ["<F2>"] = { "<cmd> Lspsaga rename <CR>", "LSP rename" },
+    ["<A-F2>"] = { "<cmd> Lspsaga rename <CR>", "LSP rename" },
 
     ["K"] = { "<cmd> Lspsaga hover_doc <CR>", "Hover documentation" },
 
@@ -759,7 +743,7 @@ M.lspsaga = {
 
 M.minimap = { n = { ["<A-l>m"] = { "<Cmd> MinimapToggle <CR>", "Toggle the minimap window" } } }
 
-M.muren = { n = { ["<A-s>m"] = { "<cmd> MurenToggle <CR>", "Toggle Muren search window" } } }
+M.muren = { n = { ["<F2>"] = { "<cmd> MurenToggle <CR>", "Toggle the search window" } } }
 
 M.possession = {
   n = {                                                          -- Normal Mode
@@ -770,17 +754,6 @@ M.possession = {
 }
 
 M.sidebar = { n = { ["<A-h>s"] = { "<cmd> SidebarNvimToggle <CR>", "Toggle the sidebar" } } }
-
---[[M.spectre = {
-  n = {                                                          -- Normal Mode
-    ["<A-s>p"] = {
-      function()
-        require("spectre").toggle()
-      end,
-      "Toggle the search panel"
-    }
-  }
-}--]]
 
 M.symbolsoutline = { n = { ["<A-l>s"] = { "<cmd> SymbolsOutline <CR>", "Toggle Map Symbols tree" } } }
 
@@ -825,6 +798,6 @@ M.truezen = { n = { ["<C-z>"] = { "<Cmd> TZFocus <CR>", "Maximize the current wi
 
 M.undotree = { n = { ["<A-u>"] = { "<cmd> UndotreeToggle <CR>", "Toggle UndoTree" } } }
 
-M.whichkey = { n = { ["<leader>wc"] = { "<cmd> NvCheatsheet <CR>", "Mapping cheatsheet" } } }
+M.whichkey = { n = { ["<leader>fk"] = { "<cmd> NvCheatsheet <CR>", "Mapping cheatsheet" } } }
 
 return M
