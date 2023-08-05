@@ -174,6 +174,9 @@ M.general = {
 
     -- wrapping & autoformat
     ["<F9>"] = { "mzgg0gqG`z <cmd> set fo+=a <CR>", "toggle the characters wrapping" },
+	
+	-- save file
+	["<C-s>"] = { "<cmd> w <CR>", "save the current file" },
   },
 
   i = {                                                          -- Insert Mode
@@ -205,7 +208,10 @@ M.general = {
     ["<S-Home>"] = { "<Esc>v0", "Select to the begining of the line" },
     ["<C-S-Home>"] = { "<Esc>vgg0", "Select to the top of the document" },
     ["<C-S-End>"] = { "<Esc>vG$", "Select to the end of the document" },
-    ["<C-a>"] = { "<Esc>gg0vG$", "Select all" }
+    ["<C-a>"] = { "<Esc>gg0vG$", "Select all" },
+	
+	-- save file
+	["<C-s>"] = { "<Esc><cmd> w <CR>", "save the current file" },
   },
 
   v = {                                                          -- Visual Mode
@@ -471,8 +477,11 @@ M.telescope = {
     ["<leader>fu"] = { '<cmd> Telescope undo <CR>', "Find in undo tree" },
 
     -- bookmarks
-    ["<leader>fB"] = { '<cmd> Telescope vim_bookmarks all <CR>', "Find bookmarks" },
-
+    ["<leader>fb"] = { '<cmd> Telescope vim_bookmarks all <CR>', "Find bookmarks" },
+	
+	-- buffers
+    ["<leader>fB"] = { "<cmd> Telescope buffers <CR>", "Find buffers" },
+	
     -- dap
     ["<leader>fdc"] = { '<cmd> Telescope dap commands <CR>', "Find dap commands" },
     ["<leader>fdC"] = { '<cmd> Telescope dap configuration <CR>', "Find dap configuration" },
@@ -488,8 +497,6 @@ M.telescope = {
 ----------------------------- Other plugin keys -----------------------------
 
 M.autosave = { n = { ["<leader>as"] = { "<cmd> AutosaveToggle <CR>", "Toggle AutoSave" } } }
-
-M.bionic = { n = { ["<F11>"] = { "<cmd> Bionic <CR>", "Toggle Bionic reading faster" } } }
 
 M.bookmark = {
   n = {                                                          -- Normal
@@ -750,6 +757,7 @@ M.minimap = { n = { ["<A-l>m"] = { "<Cmd> MinimapToggle <CR>", "Toggle the minim
 M.muren = { n = { ["<F2>"] = { "<cmd> MurenToggle <CR>", "Toggle the search window" } } }
 
 M.possession = {
+plugin = true,
   n = {                                                          -- Normal Mode
     ["<leader>Ss"] = { ":PossessionSave ", "Save the session as..." },
     ["<leader>Sc"] = { "<Cmd> PossessionClose <CR>", "Close the current session" },

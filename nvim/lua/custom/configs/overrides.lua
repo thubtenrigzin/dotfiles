@@ -119,16 +119,17 @@ M.mason = {
     "clang-format",
 
     -- Go
-    "gopls",
+    --"gopls",
 
     -- python
     "pyright",
 
     -- DAP
-    "delve",
+    --"delve",
     "cpptools",
     "debugpy",
-    "node-debug2-adapter",
+    --"node-debug2-adapter",
+	"js-debug-adapter"
   },
 }
 
@@ -187,14 +188,14 @@ M.nvterm = {
 }
 
 M.telescope = {
-  --[[extensions = {
+  extensions = {
     fzf = {
       fuzzy = true,
       override_generic_sorter = true,
       override_file_sorter = true,
       case_mode = "smart_case",
     }
-  }--]]
+  }
 }
 
 M.treesitter = {

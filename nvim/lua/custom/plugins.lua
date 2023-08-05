@@ -3,14 +3,19 @@ TODO:
 sidebar
 lspsaga full setup in file
 null-ls config file
-telescope config
+telescope config and fzf & extensions_list
 trouble config file
 noice config file
-hlchunk config file
 devicon see override config
+liveserver
+hightlight for dapui: https://github.com/rcarriga/nvim-dap-ui/blob/master/lua/dapui/config/highlights.lua
+typescript: https://github.com/marilari88/twoslash-queries.nvim & https://github.com/pmizio/typescript-tools.nvim
 
 FIX:
 matchup not working
+cmp codeium
+hlchunk highlight on dapui / noice
+typescript dap: https://theosteiner.de/debugging-javascript-frameworks-in-neovim
 
 BUG:
 telescope fzf
@@ -119,9 +124,16 @@ local plugins = {
           require("telescope").load_extension("undo")
         end,
       },
-      --{ "nvim-telescope/telescope-fzf-native.nvim", build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build" },
+	  
+	  {
+      "nvim-telescope/telescope-fzf-native.nvim",
+      build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+      config = function()
+        require("telescope").load_extension("fzf")
+      end,
+      },
     },
-    --opts = overrides.telescope,
+	opts = overrides.telescope,
   },
 
   {
@@ -143,8 +155,6 @@ local plugins = {
     end,
   },
 
-  { "HampusHauffman/bionic.nvim", cmd = { "Bionic" } },
-
   {
     "weilbith/nvim-code-action-menu",
     cmd = "CodeActionMenu",
@@ -152,7 +162,20 @@ local plugins = {
       dofile(vim.g.base46_cache .. "git")
     end,
   },
-
+  
+  {
+    "neoclide/coc.nvim",
+	event = "VeryLazy",
+    branch = "release",
+	dependencies = {
+	    "yaegassy/coc-volar",
+	  {
+	    "yaegassy/coc-volar-tools",
+        build = "yarn install --frozen-lockfile",
+	  },
+	},
+  },
+  
   {
     "Exafunction/codeium.vim",
     event = "VeryLazy",
@@ -182,21 +205,14 @@ local plugins = {
       require "custom.configs.dap"
     end,
   },
-
-  {
-    "Bekaboo/dropbar.nvim",
-    event = "VeryLazy",
-    config = function()
-      require "custom.configs.dropbar"
-    end,
-  },
-
   -- Go
-  {
+  --[[{
     "leoluz/nvim-dap-go",
     ft = "go",
     config = true
-  },
+  },]]
+  -- JS / TS
+  { "mxsdev/nvim-dap-vscode-js", ft = { "javascript", "typescript" } },
 
   -- python
   {
@@ -204,6 +220,14 @@ local plugins = {
     ft = "python",
     config = function()
       require("dap-python").setup(vim.fn.getcwd() .. '\\.virtualenvs\\debugpy\\Scripts\\python' )
+    end,
+  },
+  
+  {
+    "Bekaboo/dropbar.nvim",
+    event = "VeryLazy",
+    config = function()
+      require "custom.configs.dropbar"
     end,
   },
 
@@ -334,6 +358,11 @@ local plugins = {
         end,
       }
     end,
+  },
+  
+  {
+    "pmizio/typescript-tools.nvim",
+	ft = "typescript"
   },
 
   { "mbbill/undotree", cmd = "UndotreeToggle" },

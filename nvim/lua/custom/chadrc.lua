@@ -3,8 +3,8 @@ local M = {}
 local highlights = require "custom.highlights"
 
 M.ui = {
-  theme = "gruvbox",
-  theme_toggle = { "gruvbox", "gruvbox_light" },
+  theme = "oceanic-next",
+  theme_toggle = { "oceanic-next", "oceanic-next_light" },
 
   lsp = { signature = { disabled = true} },
 
@@ -51,15 +51,11 @@ M.ui = {
   },
 }
 
-M.lazy_nvim = {
-  ui = {
-    border = "solid",
-  },
-}
-
 M.plugins = "custom.plugins"
 
 -- check core.mappings for table structure
 M.mappings = require "custom.mappings"
+
+M.options = require "custom.options"
 
 return M

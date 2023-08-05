@@ -72,4 +72,6 @@ lspconfig.emmet_ls.setup {
 lspconfig.volar.setup {
   on_attach = on_attach,
   capabilities = capabilities,
+  
+  filetypes = {'typescript', 'javascript', 'vue', 'json'}
 }
