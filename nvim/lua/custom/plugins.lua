@@ -83,7 +83,13 @@ local plugins = {
     end,
   },
 
-  { "L3MON4D3/LuaSnip",	opts = overrides.luasnip },
+  {
+    "L3MON4D3/LuaSnip",
+    opts = overrides.luasnip,
+    config = function()
+      require("luasnip").filetype_extend("vue", {"html"})
+    end
+  },
 
   { "williamboman/mason.nvim", opts = overrides.mason },
 
@@ -124,16 +130,16 @@ local plugins = {
           require("telescope").load_extension("undo")
         end,
       },
-	  
-	  {
-      "nvim-telescope/telescope-fzf-native.nvim",
-      build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
-      config = function()
-        require("telescope").load_extension("fzf")
-      end,
+
+      {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+        config = function()
+          require("telescope").load_extension("fzf")
+        end,
       },
     },
-	opts = overrides.telescope,
+    opts = overrides.telescope,
   },
 
   {
@@ -162,20 +168,20 @@ local plugins = {
       dofile(vim.g.base46_cache .. "git")
     end,
   },
-  
+
   {
     "neoclide/coc.nvim",
-	event = "VeryLazy",
+    event = "VeryLazy",
     branch = "release",
-	dependencies = {
-	    "yaegassy/coc-volar",
-	  {
-	    "yaegassy/coc-volar-tools",
+    dependencies = {
+      "yaegassy/coc-volar",
+      {
+        "yaegassy/coc-volar-tools",
         build = "yarn install --frozen-lockfile",
-	  },
-	},
+      },
+    },
   },
-  
+
   {
     "Exafunction/codeium.vim",
     event = "VeryLazy",
@@ -222,7 +228,7 @@ local plugins = {
       require("dap-python").setup(vim.fn.getcwd() .. '\\.virtualenvs\\debugpy\\Scripts\\python' )
     end,
   },
-  
+
   {
     "Bekaboo/dropbar.nvim",
     event = "VeryLazy",
@@ -359,10 +365,10 @@ local plugins = {
       }
     end,
   },
-  
+
   {
     "pmizio/typescript-tools.nvim",
-	ft = "typescript"
+    ft = "typescript"
   },
 
   { "mbbill/undotree", cmd = "UndotreeToggle" },

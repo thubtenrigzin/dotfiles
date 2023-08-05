@@ -129,7 +129,7 @@ M.mason = {
     "cpptools",
     "debugpy",
     --"node-debug2-adapter",
-	"js-debug-adapter"
+    "js-debug-adapter"
   },
 }
 
