@@ -40,7 +40,6 @@ local plugins = {
     dependencies = {
       "hrsh7th/cmp-nvim-lsp-document-symbol",
       "hrsh7th/cmp-emoji",
-      "hrsh7th/cmp-nvim-lsp-signature-help",
       "f3fora/cmp-spell",
       "ray-x/cmp-treesitter",
     },

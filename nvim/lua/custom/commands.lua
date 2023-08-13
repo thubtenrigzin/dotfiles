@@ -16,13 +16,13 @@ autocmd('TextYankPost', {
   end,
 })
 
---[[autocmd("BufEnter", {
+autocmd("VimEnter", {
   callback = function()
     if vim.fn.isdirectory(vim.v.argv[4]) == 1 then
       cmd "NvimTreeToggle"
     end
   end,
-})]]
+})
 
 -- Auto resize panes when resizing nvim window
 -- autocmd("VimResized", {

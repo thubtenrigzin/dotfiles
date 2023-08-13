@@ -174,9 +174,13 @@ M.general = {
 
     -- wrapping & autoformat
     ["<F9>"] = { "mzgg0gqG`z <cmd> set fo+=a <CR>", "toggle the characters wrapping" },
-	
-	-- save file
-	["<C-s>"] = { "<cmd> w <CR>", "save the current file" },
+
+    -- save file
+    ["<C-s>"] = { "<cmd> w <CR>", "save the current file" },
+
+    -- time travel
+    ["<C-PageUp>"] = { "g+", "go up through this history" },
+    ["<C-PageDown>"] = { "g-", "go down through the history" },
   },
 
   i = {                                                          -- Insert Mode
@@ -209,9 +213,9 @@ M.general = {
     ["<C-S-Home>"] = { "<Esc>vgg0", "Select to the top of the document" },
     ["<C-S-End>"] = { "<Esc>vG$", "Select to the end of the document" },
     ["<C-a>"] = { "<Esc>gg0vG$", "Select all" },
-	
-	-- save file
-	["<C-s>"] = { "<Esc><cmd> w <CR>", "save the current file" },
+
+    -- save file
+    ["<C-s>"] = { "<Esc><cmd> w <CR>", "save the current file" },
   },
 
   v = {                                                          -- Visual Mode
@@ -449,7 +453,10 @@ M.tabufline = {
       "Close the current buffer",
     },
 
-    ["<leader><C-S-Tab>"] = { "<cmd> tabnew <CR>", "Create a new Tab" },
+    ["<leader><C-S-Tab>"] = { "<cmd> tabnew <CR>", "Create a new tab" },
+    ["<leader><C-Tab>"] = { "<Cmd>tabn <CR>", "Go to the next tab" },
+    ["<leader><S-Tab>"] = { "<Cmd>tabp <CR>", "Go to the previous tab" },
+    ["<leader>Q"] = { "<cmd> tabclose <CR>", "Close the tab" },
   },
 }
 
@@ -478,10 +485,10 @@ M.telescope = {
 
     -- bookmarks
     ["<leader>fb"] = { '<cmd> Telescope vim_bookmarks all <CR>', "Find bookmarks" },
-	
-	-- buffers
+
+    -- buffers
     ["<leader>fB"] = { "<cmd> Telescope buffers <CR>", "Find buffers" },
-	
+
     -- dap
     ["<leader>fdc"] = { '<cmd> Telescope dap commands <CR>', "Find dap commands" },
     ["<leader>fdC"] = { '<cmd> Telescope dap configuration <CR>', "Find dap configuration" },
@@ -525,6 +532,12 @@ M.codeium = {
     ["<A-c>h"] = { "<Cmd> call codeium#CycleCompletions(-1) <CR>", opts = { expr = true }, "Previous Codeium suggestion" },
     ["<A-c>k"] = { "<Cmd> call codeium#Clear() <CR>", opts = { expr = true }, "Clear Codeium suggestion" },
   }
+}
+
+M.coc = {
+  n = {                                                          -- Normal Mode
+    ["<leader>vs"] = { "<cmd> CocCommand volar.action.splitEditors <CR>", "Split Vue file in 3 windows" },
+  },
 }
 
 M.dap = {
@@ -741,7 +754,7 @@ M.lspsaga = {
     ["<leader>lt"] = { "<cmd> Lspsaga goto_type_definition <CR>", "LSP Definition" },
     ["<leader>lwt"] = { "<cmd> Lspsaga peek_type_definition <CR>", "LSP preview type definition" },
 
-    ["<A-F2>"] = { "<cmd> Lspsaga rename <CR>", "LSP rename" },
+    ["<F2>"] = { "<cmd> Lspsaga rename <CR>", "LSP rename" },
 
     ["K"] = { "<cmd> Lspsaga hover_doc <CR>", "Hover documentation" },
 
@@ -754,10 +767,10 @@ M.lspsaga = {
 
 M.minimap = { n = { ["<A-l>m"] = { "<Cmd> MinimapToggle <CR>", "Toggle the minimap window" } } }
 
-M.muren = { n = { ["<F2>"] = { "<cmd> MurenToggle <CR>", "Toggle the search window" } } }
+M.muren = { n = { ["<F5>"] = { "<cmd> MurenToggle <CR>", "Toggle the search window" } } }
 
 M.possession = {
-plugin = true,
+  plugin = true,
   n = {                                                          -- Normal Mode
     ["<leader>Ss"] = { ":PossessionSave ", "Save the session as..." },
     ["<leader>Sc"] = { "<Cmd> PossessionClose <CR>", "Close the current session" },
