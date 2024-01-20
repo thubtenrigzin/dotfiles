@@ -4,10 +4,10 @@ if not present then
   return
 end
 
-dropbar.setup{
+dropbar.setup {
   bar = {
     pick = {
-      pivots = "uiopjklm,;:!"
-    }
-  }
+      pivots = "uiopjklm,;:!",
+    },
+  },
 }

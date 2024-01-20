@@ -1,40 +1,10 @@
---[[
-TODO:
-sidebar
-lspsaga full setup in file
-null-ls config file
-telescope config and fzf & extensions_list
-trouble config file
-noice config file
-devicon see override config
-liveserver
-hightlight for dapui: https://github.com/rcarriga/nvim-dap-ui/blob/master/lua/dapui/config/highlights.lua
-typescript: https://github.com/marilari88/twoslash-queries.nvim & https://github.com/pmizio/typescript-tools.nvim
-
-FIX:
-matchup not working
-cmp codeium
-hlchunk highlight on dapui / noice
-typescript dap: https://theosteiner.de/debugging-javascript-frameworks-in-neovim
-
-BUG:
-telescope fzf
-
-NOTE:
-command telescope not found
-change path spellcheck
-typescript.nvim vs typescript-tools
-see test files programming
---]]
-
----@type NvPluginSpec[]
-
 local overrides = require "custom.configs.overrides"
 
+---@type NvPluginSpec[]
 local plugins = {
-
-  --------------------------- NvChad default plugins ---------------------------
-
+  --
+  -- Override plugins configuration
+  --
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
@@ -42,28 +12,39 @@ local plugins = {
       "hrsh7th/cmp-emoji",
       "f3fora/cmp-spell",
       "ray-x/cmp-treesitter",
+
+      { "zbirenbaum/copilot-cmp", config = true },
     },
     opts = overrides.cmp,
   },
 
-  { "NvChad/nvim-colorizer.lua", opts = overrides.colorizer },
+  {
+    "numToStr/Comment.nvim",
+    dependencies = "JoosepAlviste/nvim-ts-context-commentstring",
+    config = function()
+      require("Comment").setup {
+        pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
+      }
+    end,
+  },
 
-  --{ "nvim-tree/nvim-web-devicons", opts = overrides.devicons },
+  { "NvChad/nvim-colorizer.lua", opts = overrides.colorizer },
 
   {
     "neovim/nvim-lspconfig",
     dependencies = {
       {
-        "jose-elias-alvarez/null-ls.nvim",
+        "glepnir//lspsaga.nvim",
         config = function()
-          require "custom.configs.null-ls"
+          require "custom.configs.lspsaga"
         end,
       },
 
       {
-        "glepnir//lspsaga.nvim",
+        "weilbith/nvim-code-action-menu",
+        cmd = "CodeActionMenu",
         config = function()
-          require "custom.configs.lspsaga"
+          dofile(vim.g.base46_cache .. "git")
         end,
       },
 
@@ -86,8 +67,8 @@ local plugins = {
     "L3MON4D3/LuaSnip",
     opts = overrides.luasnip,
     config = function()
-      require("luasnip").filetype_extend("vue", {"html"})
-    end
+      require("luasnip").filetype_extend("vue", { "html" })
+    end,
   },
 
   { "williamboman/mason.nvim", opts = overrides.mason },
@@ -101,19 +82,20 @@ local plugins = {
     dependencies = {
       "windwp/nvim-ts-autotag",
       "hiphish/rainbow-delimiters.nvim",
-
-      {
-        "JoosepAlviste/nvim-ts-context-commentstring",
-        config = function()
-          require "custom.configs.comment"
-        end
+	  
+	  {
+        "andymass/vim-matchup",
+        config = true,
+        init = function()
+          vim.g.matchup_matchparen_offscreen = { method = "popup" }
+        end,
       },
     },
     opts = overrides.treesitter,
     config = function(_, opts)
       dofile(vim.g.base46_cache .. "syntax")
-      require "nvim-treesitter.configs".setup(opts)
-      require('nvim-treesitter.install').compilers = { "clang" }
+      require("nvim-treesitter.configs").setup(opts)
+      require("nvim-treesitter.install").compilers = { "clang" }
     end,
   },
 
@@ -126,7 +108,7 @@ local plugins = {
       {
         "debugloop/telescope-undo.nvim",
         config = function()
-          require("telescope").load_extension("undo")
+          require("telescope").load_extension "undo"
         end,
       },
 
@@ -134,7 +116,7 @@ local plugins = {
         "nvim-telescope/telescope-fzf-native.nvim",
         build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
         config = function()
-          require("telescope").load_extension("fzf")
+          require("telescope").load_extension "fzf"
         end,
       },
     },
@@ -150,30 +132,16 @@ local plugins = {
     end,
   },
 
-  --------------------------- Other plugins ---------------------------
-
-  {
-    "MattesGroeger/vim-bookmarks",
-    event = "VeryLazy",
-    init = function()
-      require "custom.configs.bookmarks"
-    end,
-  },
-
-  {
-    "weilbith/nvim-code-action-menu",
-    cmd = "CodeActionMenu",
-    config = function()
-      dofile(vim.g.base46_cache .. "git")
-    end,
-  },
-
+  --
+  -- Install plugins
+  --
   {
     "neoclide/coc.nvim",
     event = "VeryLazy",
     branch = "release",
     dependencies = {
       "yaegassy/coc-volar",
+
       {
         "yaegassy/coc-volar-tools",
         build = "yarn install --frozen-lockfile",
@@ -182,50 +150,45 @@ local plugins = {
   },
 
   {
-    "Exafunction/codeium.vim",
-    event = "VeryLazy",
-    config = function()
-      require "custom.configs.codeium"
-    end
-  },
-
-  {
     "nvim-zh/colorful-winsep.nvim",
     event = "WinNew",
     config = true,
   },
 
-  --
-  -- DAP
-  --
   {
-    "mfussenegger/nvim-dap",
-    dependencies = {
-      {
-        "rcarriga/nvim-dap-ui",
-        dependencies = { "theHamsta/nvim-dap-virtual-text", config = true },
-      },
-    },
+    "stevearc/conform.nvim",
     config = function()
-      require "custom.configs.dap"
+      require "custom.configs.conform"
     end,
   },
-  -- Go
-  --[[{
-    "leoluz/nvim-dap-go",
-    ft = "go",
-    config = true
-  },]]
-  -- JS / TS
-  { "mxsdev/nvim-dap-vscode-js", ft = { "javascript", "typescript" } },
 
-  -- python
   {
-    "mfussenegger/nvim-dap-python",
-    ft = "python",
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
     config = function()
-      require("dap-python").setup(vim.fn.getcwd() .. '\\.virtualenvs\\debugpy\\Scripts\\python' )
+      require "custom.configs.copilot"
     end,
+  },
+
+  { "Exafunction/codeium.nvim", cmd = "Codeium", config = true },
+
+  {
+    "Zeioth/compiler.nvim",
+    cmd = { "CompilerOpen", "CompilerToggleResults", "CompilerRedo" },
+    dependencies = {
+      {
+        "stevearc/overseer.nvim",
+        commit = "400e762648b70397d0d315e5acaf0ff3597f2d8b",
+        opts = {
+          task_list = {
+            direction = "bottom",
+            min_height = 25,
+            max_height = 25,
+            default_detail = 1,
+          },
+        },
+      },
+    },
   },
 
   {
@@ -235,8 +198,6 @@ local plugins = {
       require "custom.configs.dropbar"
     end,
   },
-
-  { "drzel/vim-gui-zoom", cmd = { "ZoomIn", "ZoomOut" } },
 
   { "ThePrimeagen/harpoon", cmd = "Harpoon" },
 
@@ -270,11 +231,7 @@ local plugins = {
   -- code-minimap : https://github.com/wfxr/code-minimap
   { "wfxr/minimap.vim", event = "VeryLazy" },
 
-  {
-    "AckslD/muren.nvim",
-    cmd = "MurenToggle",
-    config = true,
-  },
+  { "AckslD/muren.nvim", cmd = "MurenToggle", config = true },
 
   {
     "folke/noice.nvim",
@@ -288,30 +245,35 @@ local plugins = {
     end,
   },
 
+  -- DAP
   {
-    "jedrzejboczar/possession.nvim",
-    cmd = { "PossessionSave", "PossessionClose", "PossessionDelete" },
-    config = function()
-      require "custom.configs.possession"
-    end,
-  },
+    "mfussenegger/nvim-dap",
+    dependencies = {
+      {
+        "rcarriga/nvim-dap-ui",
+        dependencies = { "theHamsta/nvim-dap-virtual-text", config = true },
+      },
 
-  { "ThePrimeagen/refactoring.nvim", cmd = "Refactor", config = true },
+      -- JS / TS
+      { "mxsdev/nvim-dap-vscode-js", ft = { "javascript", "typescript" } },
 
-  {
-    "sidebar-nvim/sidebar.nvim",
-    cmd = "SidebarNvimToggle",
-    dependencies = "sidebar-nvim/sections-dap",
+      -- python
+      {
+        "mfussenegger/nvim-dap-python",
+        ft = "python",
+        config = function()
+          require("dap-python").setup(vim.fn.getcwd() .. "\\.virtualenvs\\debugpy\\Scripts\\python")
+        end,
+      },
+    },
     config = function()
-      require "custom.configs.sidebar"
+      require "custom.configs.dap"
     end,
   },
 
   { "petertriho/nvim-scrollbar", event = "CursorMoved", config = true },
 
-  { "simrat39/symbols-outline.nvim", cmd = "SymbolsOutline", config = true },
-
-  { "folke/todo-comments.nvim", event = "VeryLazy", config = true },
+  { "kylechui/nvim-surround", event = "VeryLazy", config = true },
 
   {
     "nguyenvukhang/nvim-toggler",
@@ -320,10 +282,6 @@ local plugins = {
       require "custom.configs.toggler"
     end,
   },
-
-  { "folke/trouble.nvim", cmd = { "TroubleToggle", "Trouble" } },
-
-  { "Pocco81/true-zen.nvim", event = "WinNew" },
 
   -- Folds
   {
@@ -366,15 +324,45 @@ local plugins = {
   },
 
   {
-    "pmizio/typescript-tools.nvim",
-    ft = "typescript"
+    "jedrzejboczar/possession.nvim",
+    cmd = { "PossessionSave", "PossessionClose", "PossessionDelete" },
+    config = function()
+      require "custom.configs.possession"
+    end,
   },
+
+  { "ThePrimeagen/refactoring.nvim", cmd = "Refactor", config = true },
+
+  {
+    "sidebar-nvim/sidebar.nvim",
+    cmd = "SidebarNvimToggle",
+    dependencies = "sidebar-nvim/sections-dap",
+    config = function()
+      require "custom.configs.sidebar"
+    end,
+  },
+
+  { "simrat39/symbols-outline.nvim", cmd = "SymbolsOutline", config = true },
+
+  { "folke/todo-comments.nvim", event = "VeryLazy", config = true },
+
+  { "folke/trouble.nvim", cmd = { "TroubleToggle", "Trouble" } },
+
+  { "Pocco81/true-zen.nvim", event = "WinNew" },
 
   { "mbbill/undotree", cmd = "UndotreeToggle" },
 
   { "ThePrimeagen/vim-be-good", cmd = "VimBeGood" },
 
-  { "kylechui/nvim-surround", event = "VeryLazy", config = true },
+  { "drzel/vim-gui-zoom", cmd = { "ZoomIn", "ZoomOut" } },
+
+  {
+    "MattesGroeger/vim-bookmarks",
+    event = "VeryLazy",
+    init = function()
+      require "custom.configs.bookmarks"
+    end,
+  },
 }
 
 return plugins

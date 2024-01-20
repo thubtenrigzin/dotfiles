@@ -4,14 +4,9 @@ if not present then
   return
 end
 
-hlchunk.setup{
-  blank = {
-    enable = false,
-  },
-  indent = {
-    enable = false,
-  },
-  line_num = {
-    enable = false,
-  },
+hlchunk.setup {
+  blank = { enable = false },
+  indent = { enable = false },
+  line_num = { enable = false },
 }
+

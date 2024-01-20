@@ -7,11 +7,11 @@ opt.expandtab = true
 opt.smartindent = true
 
 opt.smartcase = true
-opt.iskeyword:append("-")
+opt.iskeyword:append "-"
 
 opt.rnu = true
 opt.scrolloff = 8
-opt.textwidth = 80
+opt.textwidth = 0
 opt.wrap = false
 opt.colorcolumn = "80"
 
@@ -24,7 +24,7 @@ opt.updatetime = 100
 opt.clipboard = ""
 
 opt.list = false
-opt.listchars = { space = "_", tab = ">~", eol = "↵" }
+opt.listchars = { space = "·", tab = "→ ", nbsp = "␣", trail = "•", eol = "¶", precedes = "«", extends = "»" }
 
 --
 -- Spellcheck

@@ -1,12 +1,14 @@
+---@type ChadrcConfig
 local M = {}
 
 local highlights = require "custom.highlights"
 
 M.ui = {
-  theme = "oceanic-next",
-  theme_toggle = { "oceanic-next", "oceanic-next_light" },
+  theme = "onedark",
+  theme_toggle = { "onedark", "one_light" },
 
-  lsp = { signature = { disabled = true} },
+  hl_override = highlights.override,
+  hl_add = highlights.add,
 
   statusline = {
     overriden_modules = function(modules)
@@ -14,14 +16,18 @@ M.ui = {
         modules,
         9,
         (function()
-          return (vim.g.codeium and "~ 󰄭 {...}" or "")
+          return (vim.g.codeium and "~ {...}" or "")
+        end)()
+      )
+      table.insert(
+        modules,
+        10,
+        (function()
+          return (vim.g.copilot and "~ {C}" or "")
         end)()
       )
     end,
   },
-
-  hl_override = highlights.override,
-  hl_add = highlights.add,
 
   nvdash = {
     load_on_startup = false,
@@ -53,9 +59,6 @@ M.ui = {
 
 M.plugins = "custom.plugins"
 
--- check core.mappings for table structure
 M.mappings = require "custom.mappings"
-
-M.options = require "custom.options"
 
 return M

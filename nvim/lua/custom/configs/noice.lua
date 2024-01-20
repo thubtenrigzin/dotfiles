@@ -14,5 +14,12 @@ noice.setup {
     hover = {
       enabled = false,
     },
+    signature = {
+      enabled = false,
+    },
+  },
+
+  messages = {
+    enabled = false,
   },
 }

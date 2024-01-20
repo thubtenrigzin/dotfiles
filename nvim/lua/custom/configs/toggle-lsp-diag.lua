@@ -4,7 +4,6 @@ if not present then
   return
 end
 
-togglelspdiag.init({
-  underline = false,
-  virtual_text = false,
-})
+togglelspdiag.init {
+  start_on = false,
+}

@@ -1,14 +1,14 @@
-local WIDTH_RATIO = 0.3
-local HEIGHT_RATIO = 0.5
-
 local M = {}
 
 M.cmp = {
   sources = {
+    { name = "copilot" },
+    { name = "codeium" },
+    { name = "nvim_lsp", trigger_characters = { "-" } },
     { name = "luasnip" },
-    { name = 'treesitter' },
+    { name = "treesitter" },
     { name = "nvim_lsp" },
-    { name = 'nvim_lsp_document_symbol' },
+    { name = "nvim_lsp_document_symbol" },
     { name = "buffer", keyword_length = 3 },
     { name = "nvim_lua" },
     { name = "path" },
@@ -21,7 +21,11 @@ M.cmp = {
         end,
       },
     },
-    { name = 'emoji' },
+    { name = "emoji" },
+  },
+
+  experimental = {
+    ghost_text = true,
   },
 }
 
@@ -31,68 +35,8 @@ M.colorizer = {
   },
 }
 
---[[M.devicons = {
-  override_by_filename = {
-    ["makefile"] = {
-      icon = "",
-      color = "#f1502f",
-      name = "Makefile",
-    },
-    ["mod"] = {
-      icon = "󰟓",
-      color = "#519aba",
-      name = "Mod",
-    },
-    ["sum"] = {
-      icon = "󰟓",
-      color = "#cbcb40",
-      cterm_color = "185",
-      name = "Sum",
-    },
-    [".gitignore"] = {
-      icon = "",
-      color = "#e24329",
-      cterm_color = "196",
-      name = "GitIgnore",
-    },
-    ["js"] = {
-      icon = "",
-      color = "#cbcb41",
-      cterm_color = "185",
-      name = "Js",
-    },
-    ["lock"] = {
-      icon = "",
-      color = "#bbbbbb",
-      cterm_color = "250",
-      name = "Lock",
-    },
-    ["package.json"] = {
-      icon = "",
-      color = "#e8274b",
-      name = "PackageJson",
-    },
-    [".eslintignore"] = {
-      icon = "󰱺",
-      color = "#e8274b",
-      name = "EslintIgnore",
-    },
-    ["tags"] = {
-      icon = "",
-      color = "#bbbbbb",
-      cterm_color = "250",
-      name = "Tags",
-    },
-    ["http"] = {
-      icon = "󰖟",
-      color = "#519aba",
-      name = "Http",
-    },
-  },
-}--]]
-
 M.luasnip = {
-  require("luasnip.loaders.from_vscode").load({ paths = { vim.fn.stdpath "config" .. "\\lua\\custom\\snippets" } })
+  require("luasnip.loaders.from_vscode").load { paths = { vim.fn.stdpath "config" .. "\\lua\\custom\\snippets" } },
 }
 
 M.mason = {
@@ -103,47 +47,52 @@ M.mason = {
 
     -- web dev stuff
     "css-lsp",
+    "emmet-ls",
     "html-lsp",
     "json-lsp",
     "typescript-language-server",
     "vue-language-server",
 
     -- Formating
-    "deno",
-    "prettier",
+    --"deno",
+    --"prettier",
 
     -- c/cpp stuff
     "clangd",
-
     "clang-format",
-
-    -- Go
-    --"gopls",
 
     -- python
     "pyright",
 
     -- DAP
-    --"delve",
-    "cpptools",
+    --"cpptools",
     "debugpy",
     --"node-debug2-adapter",
-    "js-debug-adapter"
+    --"js-debug-adapter"
   },
 }
 
 M.nvimtree = {
-  view = {
-    --side = "left",
-    --width = 30,
+  git = { enable = true },
 
+  renderer = {
+    root_folder_label = true,
+    highlight_git = true,
+    icons = {
+      show = {
+        git = true,
+      },
+    },
+  },
+
+  view = {
     float = {
       enable = true,
       open_win_config = function()
         local screen_w = vim.opt.columns:get()
         local screen_h = vim.opt.lines:get() - vim.opt.cmdheight:get()
-        local window_w = screen_w * WIDTH_RATIO
-        local window_h = screen_h * HEIGHT_RATIO
+        local window_w = screen_w * 0.5 -- width constant
+        local window_h = screen_h * 0.5 -- heigth constant
         local window_w_int = math.floor(window_w)
         local window_h_int = math.floor(window_h)
         local center_x = (screen_w - window_w) / 2
@@ -158,22 +107,6 @@ M.nvimtree = {
         }
       end,
     },
-
-    width = function()
-      return math.floor(vim.opt.columns:get() * WIDTH_RATIO)
-    end,
-  },
-
-  git = { enable = true },
-
-  renderer = {
-    root_folder_label = true,
-    highlight_git = true,
-    icons = {
-      show = {
-        git = true,
-      },
-    },
   },
 }
 
@@ -183,7 +116,7 @@ M.nvterm = {
       horizontal = { location = "rightbelow", split_ratio = 0.3 },
       vertical = { location = "leftabove", split_ratio = 0.5 },
     },
-  }
+  },
 }
 
 M.telescope = {
@@ -193,46 +126,42 @@ M.telescope = {
       override_generic_sorter = true,
       override_file_sorter = true,
       case_mode = "smart_case",
-    }
-  }
+    },
+  },
 }
 
 M.treesitter = {
+  autotag = { enable = true },
+
   ensure_installed = {
     --"bash",
-    "c",
+    --"c",
     --"cpp",
-    --"css",
     --"dockerfile",
     "html",
     --"http",
-    --"javascript",
-    --"json",
+    "css",
+    "javascript",
+    "json",
     "markdown",
     "markdown_inline",
     --"php",
-    --"python",
-    --"regex",
-    --"typescript",
-    --"scss",
+    "python",
+    "regex",
+    "scss",
     --"sql",
-    --"vim",
-    --"vue",
-  },
-
-  autotag = { enable = true },
-
-  context_commentstring = {
-    enable = true,
-    enable_autocmd = false,
+    "typescript",
+    "vue",
   },
 
   indent = {
     enable = true,
-    disable = {
-      "python",
-    },
+    -- disable = {
+    --   "python"
+    -- },
   },
+  
+  matchup = { enable = true },
 }
 
 return M

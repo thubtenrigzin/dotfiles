@@ -73,20 +73,10 @@ sidebar.setup{
   containers = {
     attach_shell = "/bin/sh", show_all = true, interval = 5000,
   },
-  ["git"] = {
-    icon = "",
-  },
-  ["diagnostics"] = {
-    icon = "",
-  },
-  ["todos"] = {
-    icon = "",
-  },
-  ["dap"] = {
-    breakpoints = {
-      icon = "🔍"
-    }
-  },
+  ["git"] = { icon = "", },
+  ["diagnostics"] = { icon = "", },
+  ["todos"] = { icon = "", },
+  ["dap"] = { breakpoints = { icon = "🔍" } },
   sections = {
     "git",
     --"diagnostics",

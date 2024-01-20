@@ -5,5 +5,6 @@ if not present then
 end
 
 iconpicker.setup {
-  disable_legacy_commands = true
+  disable_legacy_commands = true,
 }
+

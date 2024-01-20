@@ -1,11 +1,9 @@
 local on_attach = require("plugins.configs.lspconfig").on_attach
 local capabilities = require("plugins.configs.lspconfig").capabilities
 
-local schemas = require('schemastore').json.schemas
-
 local lspconfig = require "lspconfig"
 
-local servers = { "html", "cssls", "tsserver", "pyright", "gopls", "jsonls" }
+local servers = { "cssls", "html", "pyright", "tsserver" }
 
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
@@ -14,9 +12,7 @@ for _, lsp in ipairs(servers) do
   }
 end
 
---
 -- clangd
---
 lspconfig.clangd.setup {
   on_attach = on_attach,
   capabilities = capabilities,
@@ -25,32 +21,10 @@ lspconfig.clangd.setup {
   cmd = {
     "clangd",
     "--offset-encoding=utf-16",
-  }
-}
-
---
--- Json schemas
---
-lspconfig.jsonls.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-
-  settings = {
-    json = {
-      schemas = schemas {
-        select = {
-          "package.json",
-          "tsconfig.json",
-        },
-      },
-      validate = { enable = true },
-    },
   },
 }
 
---
 -- Emmet
---
 lspconfig.emmet_ls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
@@ -63,15 +37,41 @@ lspconfig.emmet_ls.setup {
         ["bem.enabled"] = true,
       },
     },
-  }
+  },
 }
 
---
+-- Json schemas
+lspconfig.jsonls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+
+  settings = {
+    json = {
+      schemas = require("schemastore").json.schemas {
+        extra = {
+          {
+            description = "NPM configuration file",
+            fileMatch = "package.json",
+            name = "package.json",
+            url = "file:///" .. vim.fn.stdpath "config" .. "\\lua\\custom\\schemastore\\package.json",
+          },
+          {
+            description = "TypeScript compiler configuration file",
+            fileMatch = { "tsconfig.json" },
+            name = "tsconfig.json",
+            url = "file:///" .. vim.fn.stdpath "config" .. "\\lua\\custom\\schemastore\\tsconfig.json",
+          },
+        },
+      },
+      validate = { enable = true },
+    },
+  },
+}
+
 -- Vue
---
 lspconfig.volar.setup {
   on_attach = on_attach,
   capabilities = capabilities,
 
-  filetypes = {'typescript', 'javascript', 'vue', 'json'}
+  filetypes = { "typescript", "javascript", "vue", "json" },
 }

@@ -6,10 +6,14 @@ end
 
 toggler.setup {
   inverses = {
-    ["vim"] = "emacs",
     ["True"] = "False",
+    ["true"] = "false",
     ["ON"] = "OFF",
     ["0"] = "1",
+    ["=="] = "!=",
+    [">"] = "<",
+    [">="] = "<=",
+    ["OR"] = "AND",
   },
 
   remove_default_keybinds = true,
