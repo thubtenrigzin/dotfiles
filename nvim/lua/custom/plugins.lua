@@ -82,8 +82,8 @@ local plugins = {
     dependencies = {
       "windwp/nvim-ts-autotag",
       "hiphish/rainbow-delimiters.nvim",
-	  
-	  {
+
+      {
         "andymass/vim-matchup",
         config = true,
         init = function()

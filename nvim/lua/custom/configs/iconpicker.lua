@@ -7,4 +7,3 @@ end
 iconpicker.setup {
   disable_legacy_commands = true,
 }
-

@@ -505,13 +505,13 @@ M.dap = {
       end,
       "Step into",
     },
-    ["<F8>"] = {
+    ["<C-F7>"] = {
       function()
         require("dap").step_out()
       end,
       "Step out",
     },
-    ["<F9>"] = {
+    ["<C-F8>"] = {
       function()
         require("dap").step_back()
       end,
@@ -548,25 +548,25 @@ M.dap = {
       end,
       "Set breakpoint",
     },
-    ["<leader>F10"] = {
+    ["<A-F9"] = {
       function()
         require("dap").set_breakpoint(nil, nil, vim.fn.input "Log point message: ")
       end,
       "Set breakpoint / message",
     },
-    ["<leader>F6"] = {
+    ["<C-A-F6>"] = {
       function()
         require("dap").repl.open()
       end,
       "Replace open",
     },
-    ["<C-A>F6"] = {
+    ["<C-F6>"] = {
       function()
         require("dap").run_last()
       end,
       "Run last",
     },
-    ["<C-F6>"] = {
+    ["<F9>"] = {
       function()
         require("dap").terminate()
         require("dap").clear_breakpoints()

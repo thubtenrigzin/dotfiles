@@ -160,7 +160,7 @@ M.treesitter = {
     --   "python"
     -- },
   },
-  
+
   matchup = { enable = true },
 }
 
