@@ -80,8 +80,16 @@ local plugins = {
   {
     "nvim-treesitter/nvim-treesitter",
     dependencies = {
+      {
+        "danymat/neogen",
+        config = function()
+          require "custom.configs.neogen"
+        end,
+      },
+
       "windwp/nvim-ts-autotag",
-      "hiphish/rainbow-delimiters.nvim",
+
+      { "hiphish/rainbow-delimiters.nvim", pin = true },
 
       {
         "andymass/vim-matchup",
@@ -104,6 +112,7 @@ local plugins = {
     dependencies = {
       "tom-anders/telescope-vim-bookmarks.nvim",
       "nvim-telescope/telescope-dap.nvim",
+      "nvim-telescope/telescope-file-browser.nvim",
 
       {
         "debugloop/telescope-undo.nvim",
@@ -157,6 +166,7 @@ local plugins = {
 
   {
     "stevearc/conform.nvim",
+    key = "<leader>lf",
     config = function()
       require "custom.configs.conform"
     end,
@@ -219,6 +229,15 @@ local plugins = {
   },
 
   { "kdheepak/lazygit.nvim", cmd = "LazyGit" },
+
+  {
+    "ggandor/leap.nvim",
+    lazy = false,
+    dependencies = { { "tpope/vim-repeat" } },
+    config = function()
+      require("leap").add_default_mappings()
+    end,
+  },
 
   {
     "echasnovski/mini.nvim",

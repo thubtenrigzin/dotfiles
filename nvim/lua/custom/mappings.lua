@@ -85,8 +85,6 @@ M.disabled = {
 --
 M.general = {
   n = {
-    [";"] = { ":", "Enter command mode", opts = { nowait = true } },
-
     -- Work with numbers
     ["<A-+>"] = { "<C-a>", "Increment the number" },
     ["<A-->"] = { "<C-x>", "Decrement the number" },
@@ -300,6 +298,15 @@ M.lspconfig = {
       "List workspace folders",
     },
   },
+
+  v = {
+    ["<leader>lg"] = {
+      function()
+        require("conform").format()
+      end,
+      "Format code",
+    },
+  },
 }
 
 M.togglelspdiagunderline = {
@@ -411,6 +418,9 @@ M.telescope = {
     ["<leader>fdb"] = { "<cmd> Telescope dap list_breakpoints <CR>", "Find dap breakpoints" },
     ["<leader>fdv"] = { "<cmd> Telescope dap variables <CR>", "Find dap variables" },
     ["<leader>fdf"] = { "<cmd> Telescope dap frames <CR>", "Find dap frames" },
+
+    -- File browser
+    ["<leader>ff"] = { "<cmd> Telescope file_browser <CR>", "File explorer" },
 
     -- Git
     ["<leader>fg"] = { '<cmd> lua require("telescope").extensions.lazygit.lazygit() <CR>', "Find Git repos" },
@@ -670,6 +680,17 @@ M.lspsaga = {
 M.minimap = { n = { ["<leader>mm"] = { "<Cmd> MinimapToggle <CR>", "Toggle the minimap window" } } }
 
 M.muren = { n = { ["<A-F2>"] = { "<cmd> MurenToggle <CR>", "Toggle the search window" } } }
+
+M.neogen = {
+  n = {
+    ["<leader>d"] = {
+      function()
+        require("neogen").generate()
+      end,
+      "Generate docstring",
+    },
+  },
+}
 
 M.possession = {
   n = {
