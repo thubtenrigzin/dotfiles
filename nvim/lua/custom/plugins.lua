@@ -88,8 +88,7 @@ local plugins = {
       },
 
       "windwp/nvim-ts-autotag",
-
-      { "hiphish/rainbow-delimiters.nvim", pin = true },
+      "hiphish/rainbow-delimiters.nvim",
 
       {
         "andymass/vim-matchup",
@@ -121,13 +120,13 @@ local plugins = {
         end,
       },
 
-      {
+      --[[{
         "nvim-telescope/telescope-fzf-native.nvim",
         build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
         config = function()
           require("telescope").load_extension "fzf"
         end,
-      },
+      },--]]
     },
     opts = overrides.telescope,
   },
@@ -232,8 +231,8 @@ local plugins = {
 
   {
     "ggandor/leap.nvim",
-    lazy = false,
-    dependencies = { { "tpope/vim-repeat" } },
+    event = "VeryLazy",
+    dependencies = "tpope/vim-repeat",
     config = function()
       require("leap").add_default_mappings()
     end,
@@ -287,6 +286,14 @@ local plugins = {
     },
     config = function()
       require "custom.configs.dap"
+    end,
+  },
+
+  {
+    "mfussenegger/nvim-lint",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      require "custom.configs.linter"
     end,
   },
 

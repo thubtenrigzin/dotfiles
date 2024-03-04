@@ -35,12 +35,11 @@ local buffers = {
   end,
 }
 
-
 local harpoon_marks = {
   title = "Harpoon Marks",
   icon = "󱡀 ",
   draw = function()
-    local marks = require "harpoon".get_mark_config().marks
+    local marks = require("harpoon").get_mark_config().marks
     local keymaps = { "1 ", "2 ", "3 ", "4 " }
     local lines = {}
 
@@ -60,7 +59,7 @@ local harpoon_marks = {
 
 vim.api.nvim_set_hl(0, "SidebarNvimSectionTitle", { fg = "#f9f5d7" })
 
-sidebar.setup{
+sidebar.setup {
   disable_default_keybindings = 1,
   bindings = nil,
   open = false,
@@ -68,14 +67,16 @@ sidebar.setup{
   initial_width = 35,
   hide_statusline = false,
   update_interval = 500,
-  section_separator = {"", "-----", ""},
-  section_title_separator = {""},
+  section_separator = { "", "-----", "" },
+  section_title_separator = { "" },
   containers = {
-    attach_shell = "/bin/sh", show_all = true, interval = 5000,
+    attach_shell = "/bin/sh",
+    show_all = true,
+    interval = 5000,
   },
-  ["git"] = { icon = "", },
-  ["diagnostics"] = { icon = "", },
-  ["todos"] = { icon = "", },
+  ["git"] = { icon = "" },
+  ["diagnostics"] = { icon = "" },
+  ["todos"] = { icon = "" },
   ["dap"] = { breakpoints = { icon = "🔍" } },
   sections = {
     "git",
@@ -86,6 +87,6 @@ sidebar.setup{
     buffers,
     -- terms,
     harpoon_marks,
-    require("dap-sidebar-nvim.breakpoints"),
+    require "dap-sidebar-nvim.breakpoints",
   },
 }

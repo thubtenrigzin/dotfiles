@@ -4,10 +4,9 @@ M.cmp = {
   sources = {
     { name = "copilot" },
     { name = "codeium" },
-    { name = "nvim_lsp", trigger_characters = { "-" } },
+    { name = "nvim_lsp" },
     { name = "luasnip" },
     { name = "treesitter" },
-    { name = "nvim_lsp" },
     { name = "nvim_lsp_document_symbol" },
     { name = "buffer", keyword_length = 3 },
     { name = "nvim_lua" },
@@ -42,31 +41,31 @@ M.luasnip = {
 M.mason = {
   ensure_installed = {
     -- lua stuff
-    "lua-language-server",
-    --"stylua",
+    "stylua",
 
     -- web dev stuff
     "css-lsp",
     "emmet-ls",
     "html-lsp",
     "json-lsp",
+    "prettier",
     "typescript-language-server",
     "vue-language-server",
-
-    -- Formating
-    --"deno",
-    --"prettier",
 
     -- c/cpp stuff
     "clangd",
     "clang-format",
 
     -- python
-    "pyright",
-
-    -- DAP
-    --"cpptools",
+    "black",
     "debugpy",
+    "isort",
+    "pylint",
+    "pyright",
+    "ruff",
+
+    --"cpptools",
+
     --"node-debug2-adapter",
     --"js-debug-adapter"
   },
@@ -137,15 +136,15 @@ M.treesitter = {
     --"bash",
     --"c",
     --"cpp",
+    "css",
     --"dockerfile",
     "html",
-    --"http",
-    "css",
+    "http",
     "javascript",
     "json",
     "markdown",
     "markdown_inline",
-    --"php",
+    "php",
     "python",
     "regex",
     "scss",

@@ -61,7 +61,6 @@ M.disabled = {
 
     -- telescope
     ["<leader>gt"] = {},
-    ["<leader>cm"] = {},
     ["<leader>pt"] = {},
     ["<leader>th"] = {},
     ["<leader>ma"] = {},
@@ -91,20 +90,11 @@ M.general = {
 
     -- Selection
     ["<C-a>"] = { "gg0vG$", "Select all" },
+
     ["<C-S-v>"] = { "<C-v>", "Block Visual mode" },
 
     -- Super clipboard
-    ["<C-S-c>"] = {
-      '"+y$:let @"=@0<cr>',
-      opts = { silent = true },
-      "Copy to the end of the line to the system clipboard",
-    },
     ["<C-c>"] = { '"+yy:let @"=@0<cr>', opts = { silent = true }, "Copy the line to the system clipboard" },
-    ["<C-S-x>"] = {
-      '"+y$:let @"=@0<cr>"_d$',
-      opts = { silent = true },
-      "Cut to the end of the line to the system clipboard",
-    },
     ["<C-x>"] = { '"+yy:let @"=@0<cr>"_dd', opts = { silent = true }, "Cut the line to the system clipboard" },
     ["<C-v>"] = { '"*p', "", "Paste from the system clipboard" },
 
@@ -172,11 +162,7 @@ M.comment = {
   },
 }
 
-M.spellcheck = {
-  n = {
-    ["<A-F12>"] = { "<cmd> set spell! <CR>", "Toggle Spell checking" },
-  },
-}
+M.spellcheck = { n = { ["<A-F12>"] = { "<cmd> set spell! <CR>", "Toggle Spell checking" } } }
 
 --
 -- NvChad default plugin keys
@@ -265,7 +251,7 @@ M.lspconfig = {
   n = {
     ["<leader>lf"] = {
       function()
-        require("conform").format()
+        require("conform").format { async = true, lsp_fallback = true }
       end,
       "Format code",
     },
@@ -315,16 +301,9 @@ M.togglelspdiagunderline = {
   },
 }
 
-M.nvdash = {
-  n = {
-    ["<C-Home>"] = { "<Cmd> Nvdash <CR>", "Launch the dashboard" },
-  },
-}
-M.nvimtree = {
-  n = {
-    ["<A-e>"] = { "<cmd> NvimTreeToggle <CR>", "Toggle nvimtree" },
-  },
-}
+M.nvdash = { n = { ["<C-Home>"] = { "<Cmd> Nvdash <CR>", "Launch the dashboard" } } }
+
+M.nvimtree = { n = { ["<A-e>"] = { "<cmd> NvimTreeToggle <CR>", "Toggle nvimtree" } } }
 
 M.nvterm = {
   n = {
@@ -469,31 +448,16 @@ M.bookmark = {
   },
 }
 
-M.coc = {
-  n = {
-    ["<leader>vs"] = { "<cmd> CocCommand volar.action.splitEditors <CR>", "Split Vue file in 3 windows" },
-  },
-}
+M.coc =
+  { n = { ["<leader>vs"] = { "<cmd> CocCommand volar.action.splitEditors <CR>", "Split Vue file in 3 windows" } } }
 
 M.codeaction = { n = { ["<leader>la"] = { "<cmd> CodeActionMenu <CR>", "LSP code action" } } }
 
-M.codeium = {
-  n = {
-    ["<leader>cm"] = { "<cmd> CodeiumOn <CR>", "Start Codeium" },
-  },
-}
+M.codeium = { n = { ["<leader>cm"] = { "<cmd> CodeiumOn <CR>", "Start Codeium" } } }
 
-M.copilot = {
-  n = {
-    ["<leader>cp"] = { "<cmd> CopilotToggle <CR>", "Toggle Copilot" },
-  },
-}
+M.copilot = { n = { ["<leader>cp"] = { "<cmd> CopilotToggle <CR>", "Toggle Copilot" } } }
 
-M.compiler = {
-  n = {
-    ["<C-F4>"] = { "<cmd> CompilerOpen <CR>", "Open the compiler" },
-  },
-}
+M.compiler = { n = { ["<C-F4>"] = { "<cmd> CompilerOpen <CR>", "Open the compiler" } } }
 
 M.dap = {
   n = {
@@ -650,13 +614,20 @@ M.harpoon = {
   },
 }
 
-M.iconpicker = {
-  n = {
-    ["<leader>:"] = { "<cmd> IconPickerNormal <CR>", "Pick an icon" },
-  },
-}
+M.iconpicker = { n = { ["<leader>:"] = { "<cmd> IconPickerNormal <CR>", "Pick an icon" } } }
 
 M.lazygit = { n = { ["<leader>gg"] = { "<cmd> LazyGit <CR>", "Lazygit" } } }
+
+M.linter = {
+  n = {
+    ["<leader>ll"] = {
+      function()
+        require("lint").try_lint()
+      end,
+      "Lint the file",
+    },
+  },
+}
 
 M.lspsaga = {
   n = {
@@ -750,7 +721,7 @@ M.trouble = {
     ["<leader>lr"] = { "<cmd> TroubleToggle lsp_references <CR>", "LSP References" },
     ["<leader>li"] = { "<cmd> TroubleToggle lsp_implementations <CR>", "LSP Implementation" },
 
-    ["<leader>ll"] = { "<cmd> TroubleToggle loclist <CR>", "Loclist" },
+    ["<leader>lo"] = { "<cmd> TroubleToggle loclist <CR>", "Loclist" },
     ["<leader>lq"] = { "<cmd> TroubleToggle quickfix <CR>", "Quickfix list" },
 
     ["<leader>lWx"] = { "<cmd> TroubleToggle workspace_diagnostics <CR>", "LSP Workspace Diagnostics" },

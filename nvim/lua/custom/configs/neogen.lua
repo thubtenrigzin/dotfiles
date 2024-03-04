@@ -15,4 +15,3 @@ neogen.setup {
     },
   },
 }
-
