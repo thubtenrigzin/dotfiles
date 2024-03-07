@@ -733,4 +733,11 @@ M.truezen = { n = { ["<leader>z"] = { "<Cmd> TZFocus <CR>", "Maximize the curren
 
 M.undotree = { n = { ["<C-z>"] = { "<cmd> UndotreeToggle <CR>", "Toggle UndoTree" } } }
 
+M.venvselector = {
+  n = {
+    ["<leader>ve"] = { "<cmd> VenvSelect <CR>", "Pick a venv" },
+    ["<leader>vv"] = { "<cmd> VenvSelectCached <CR>", "Retrieve the venv from a cache" },
+  },
+}
+
 return M

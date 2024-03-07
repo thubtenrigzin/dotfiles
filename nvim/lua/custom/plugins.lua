@@ -389,6 +389,16 @@ local plugins = {
       require "custom.configs.bookmarks"
     end,
   },
+
+  { "linux-cultist/venv-selector.nvim", event = "VeryLazy", config = true },
+
+  {
+    "linux-cultist/venv-selector.nvim",
+    event = "VeryLazy",
+    config = function()
+      require "custom.configs.venv"
+    end,
+  },
 }
 
 return plugins
