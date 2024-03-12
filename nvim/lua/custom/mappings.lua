@@ -357,14 +357,14 @@ M.tabufline = {
   n = {
     ["<C-S-Tab>"] = { "<cmd> enew <CR>", "Create a new buffer" },
 
-    ["[<Tab>"] = {
+    ["<leader><Tab>"] = {
       function()
         require("nvchad.tabufline").tabuflineNext()
       end,
       "Go to next buffer",
     },
 
-    ["[<S-tab>"] = {
+    ["<leader><S-tab>"] = {
       function()
         require("nvchad.tabufline").tabuflinePrev()
       end,
@@ -412,6 +412,7 @@ M.telescope = {
 
     -- Lsp stuffs
     ["<leader>fs"] = { "<cmd> Telescope lsp_document_symbols <CR>", "Find Symbols" },
+    ["<leader>fWs"] = { "<cmd> Telescope lsp_dynamic_workspace_symbols <CR>", "Find Symbols in workspace" },
 
     ["<leader>fr"] = { "<cmd> Telescope lsp_references <CR>", "Find lsp References" },
     ["<leader>fi"] = { "<cmd> Telescope lsp_implementations <CR>", "Find lsp implementations" },
@@ -733,11 +734,6 @@ M.truezen = { n = { ["<leader>z"] = { "<Cmd> TZFocus <CR>", "Maximize the curren
 
 M.undotree = { n = { ["<C-z>"] = { "<cmd> UndotreeToggle <CR>", "Toggle UndoTree" } } }
 
-M.venvselector = {
-  n = {
-    ["<leader>ve"] = { "<cmd> VenvSelect <CR>", "Pick a venv" },
-    ["<leader>vv"] = { "<cmd> VenvSelectCached <CR>", "Retrieve the venv from a cache" },
-  },
-}
+M.venvselector = { n = { ["<leader>ve"] = { "<cmd> VenvSelect <CR>", "Pick a venv" } } }
 
 return M

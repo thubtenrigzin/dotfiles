@@ -139,6 +139,7 @@ M.treesitter = {
     "css",
     --"dockerfile",
     "html",
+    "htmldjango",
     "http",
     "javascript",
     "json",
