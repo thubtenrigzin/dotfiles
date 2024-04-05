@@ -1,10 +1,6 @@
-local present, conform = pcall(require, "conform")
+local options = {
+  lsp_fallback = true,
 
-if not present then
-  return
-end
-
-conform.setup {
   formatters_by_ft = {
     css = { "prettier" },
     html = { "prettier" },
@@ -15,3 +11,5 @@ conform.setup {
     typescript = { "prettier" },
   },
 }
+
+require("conform").setup(options)

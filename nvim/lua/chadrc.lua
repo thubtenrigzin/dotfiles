@@ -1,32 +1,43 @@
 ---@type ChadrcConfig
 local M = {}
 
-local highlights = require "custom.highlights"
+local highlights = require "highlights"
 
 M.ui = {
-  theme = "onedark",
-  theme_toggle = { "onedark", "one_light" },
+  theme = "tokyonight",
+  theme_toggle = { "tokyonight", "one_light" },
 
   hl_override = highlights.override,
   hl_add = highlights.add,
 
   statusline = {
-    overriden_modules = function(modules)
-      table.insert(
-        modules,
-        9,
-        (function()
-          return (vim.g.codeium and "~ {...}" or "")
-        end)()
-      )
-      table.insert(
-        modules,
-        10,
-        (function()
-          return (vim.g.copilot and "~ {C}" or "")
-        end)()
-      )
-    end,
+    theme = "default",
+    order = {
+      "mode",
+      "file",
+      "autosave_status",
+      "git",
+      "%=",
+      "lsp_msg",
+      "%=",
+      "diagnostics",
+      "codeium_status",
+      "lsp",
+      "copilot_status",
+      "cwd",
+      "cursor",
+    },
+    modules = {
+      autosave_status = function()
+        return "%#AutoSaveHl#" .. (vim.g.autosave and " 󰳼 " or " 󱙄 ")
+      end,
+      codeium_status = function()
+        return "%#CodeiumHl#" .. (vim.g.codeium and "{󰇘}" or "{󰇘}")
+      end,
+      copilot_status = function()
+        return "%#CopilotHl#" .. (vim.g.copilot and "  " or "  ")
+      end,
+    },
   },
 
   nvdash = {
@@ -56,9 +67,5 @@ M.ui = {
     },
   },
 }
-
-M.plugins = "custom.plugins"
-
-M.mappings = require "custom.mappings"
 
 return M

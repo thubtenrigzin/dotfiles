@@ -1,4 +1,7 @@
-local overrides = require "custom.configs.overrides"
+local overrides = require "configs.overrides"
+
+local opt = vim.opt
+local g = vim.g
 
 ---@type NvPluginSpec[]
 local plugins = {
@@ -28,16 +31,23 @@ local plugins = {
     end,
   },
 
+  { "lewis6991/gitsigns.nvim", opts = overrides.gitsigns },
+
   { "NvChad/nvim-colorizer.lua", opts = overrides.colorizer },
 
   {
     "neovim/nvim-lspconfig",
     dependencies = {
       {
-        "glepnir//lspsaga.nvim",
+        "glepnir/lspsaga.nvim",
         config = function()
-          require "custom.configs.lspsaga"
+          require "configs.lspsaga"
         end,
+      },
+
+      {
+        "ray-x/lsp_signature.nvim",
+        opts = { hint_enable = false },
       },
 
       {
@@ -53,20 +63,23 @@ local plugins = {
       {
         "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim",
         config = function()
-          require "custom.configs.toggle-lsp-diag"
+          require "configs.toggle-lsp-diag"
         end,
       },
     },
     config = function()
-      require "plugins.configs.lspconfig"
-      require "custom.configs.lspconfig"
+      require("nvchad.configs.lspconfig").defaults()
+      require "configs.lspconfig"
     end,
   },
 
   {
     "L3MON4D3/LuaSnip",
-    opts = overrides.luasnip,
+    init = function()
+      g.vscode_snippets_path = vim.fn.stdpath "config" .. "\\lua\\snippets"
+    end,
     config = function()
+      require "nvchad.configs.luasnip"
       require("luasnip").filetype_extend("vue", { "html" })
     end,
   },
@@ -83,7 +96,7 @@ local plugins = {
       {
         "danymat/neogen",
         config = function()
-          require "custom.configs.neogen"
+          require "configs.neogen"
         end,
       },
 
@@ -94,7 +107,7 @@ local plugins = {
         "andymass/vim-matchup",
         config = true,
         init = function()
-          vim.g.matchup_matchparen_offscreen = { method = "popup" }
+          g.matchup_matchparen_offscreen = { method = "popup" }
         end,
       },
     },
@@ -136,14 +149,14 @@ local plugins = {
     event = "VeryLazy",
     config = function()
       dofile(vim.g.base46_cache .. "whichkey")
-      require "custom.configs.whichkey"
+      require "configs.whichkey"
     end,
   },
 
   --
   -- Install plugins
   --
-  {
+  --[[{
     "neoclide/coc.nvim",
     event = "VeryLazy",
     branch = "release",
@@ -155,7 +168,7 @@ local plugins = {
         build = "yarn install --frozen-lockfile",
       },
     },
-  },
+  },--]]
 
   {
     "nvim-zh/colorful-winsep.nvim",
@@ -167,17 +180,34 @@ local plugins = {
     "stevearc/conform.nvim",
     key = "<leader>lf",
     config = function()
-      require "custom.configs.conform"
+      require "configs.conform"
     end,
   },
 
   {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
+    dependencies = {
+      {
+        "CopilotC-Nvim/CopilotChat.nvim",
+        branch = "canary",
+        opts = {
+          debug = true,
+        },
+      },
+    },
     config = function()
-      require "custom.configs.copilot"
+      require "configs.copilot"
     end,
   },
+
+  --[[{
+		"Exafunction/codeium.nvim",
+		cmd = "Codeium",
+		config = function()
+			require("configs.codeium")
+		end,
+	},--]]
 
   { "Exafunction/codeium.nvim", cmd = "Codeium", config = true },
 
@@ -204,7 +234,7 @@ local plugins = {
     "Bekaboo/dropbar.nvim",
     event = "VeryLazy",
     config = function()
-      require "custom.configs.dropbar"
+      require "configs.dropbar"
     end,
   },
 
@@ -214,7 +244,7 @@ local plugins = {
     "shellRaining/hlchunk.nvim",
     event = "VeryLazy",
     config = function()
-      require "custom.configs.hlchunk"
+      require "configs.hlchunk"
     end,
   },
 
@@ -223,7 +253,7 @@ local plugins = {
     cmd = "IconPickerNormal",
     dependencies = "stevearc/dressing.nvim",
     config = function()
-      require "custom.configs.iconpicker"
+      require "configs.iconpicker"
     end,
   },
 
@@ -242,7 +272,7 @@ local plugins = {
     "echasnovski/mini.nvim",
     event = "VeryLazy",
     config = function()
-      require "custom.configs.mini"
+      require "configs.mini"
     end,
   },
 
@@ -259,7 +289,7 @@ local plugins = {
       "rcarriga/nvim-notify",
     },
     config = function()
-      require "custom.configs.noice"
+      require "configs.noice"
     end,
   },
 
@@ -269,7 +299,11 @@ local plugins = {
     dependencies = {
       {
         "rcarriga/nvim-dap-ui",
-        dependencies = { "theHamsta/nvim-dap-virtual-text", config = true },
+        dependencies = {
+          "nvim-neotest/nvim-nio",
+
+          { "theHamsta/nvim-dap-virtual-text", config = true },
+        },
       },
 
       -- JS / TS
@@ -285,7 +319,7 @@ local plugins = {
       },
     },
     config = function()
-      require "custom.configs.dap"
+      require "configs.dap"
     end,
   },
 
@@ -293,7 +327,7 @@ local plugins = {
     "mfussenegger/nvim-lint",
     event = { "BufReadPre", "BufNewFile" },
     config = function()
-      require "custom.configs.linter"
+      require "configs.linter"
     end,
   },
 
@@ -305,41 +339,43 @@ local plugins = {
     "nguyenvukhang/nvim-toggler",
     event = "VeryLazy",
     config = function()
-      require "custom.configs.toggler"
+      require "configs.toggler"
     end,
   },
 
   -- Folds
   {
     "kevinhwang91/nvim-ufo",
-    event = "BufReadPost",
-    keys = { "zf", "zo", "za", "zc", "zM", "zR" },
+    event = { "BufReadPost", "BufNewFile" },
     dependencies = {
-      "kevinhwang91/promise-async",
-
       {
         "luukvbaal/statuscol.nvim",
+        dependencies = "kevinhwang91/promise-async",
         config = function()
           local builtin = require "statuscol.builtin"
           require("statuscol").setup {
             relculright = true,
+            ft_ignore = { "neo-tree", "Outline" },
             segments = {
-              { text = { builtin.foldfunc }, click = "v:lua.ScFa" },
-              { text = { "%s" }, click = "v:lua.ScSa" },
-              { text = { builtin.lnumfunc, " " }, click = "v:lua.ScLa" },
+              { text = { builtin.foldfunc, "  " }, click = "v:lua.ScFa" },
+              { sign = { namespace = { "diagnostic*" }, maxwidth = 2, auto = true } },
+              { sign = { namespace = { "gitsign" }, maxwidth = 1, auto = true }, click = "v:lua.ScSa" },
+              { text = { builtin.lnumfunc, "  " }, click = "v:lua.ScLa" },
+              {
+                sign = { name = { ".*" }, maxwidth = 2, colwidth = 1 },
+                click = "v:lua.ScSa",
+              },
             },
           }
         end,
       },
-
-      {
-        "anuvyklack/fold-preview.nvim",
-        dependencies = "anuvyklack/keymap-amend.nvim",
-        opts = {
-          border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-        },
-      },
     },
+    init = function()
+      opt.foldcolumn = "1"
+      opt.foldlevel = 99
+      opt.foldlevelstart = 99
+      opt.foldenable = true
+    end,
     config = function()
       require("ufo").setup {
         provider_selector = function()
@@ -353,7 +389,7 @@ local plugins = {
     "jedrzejboczar/possession.nvim",
     cmd = { "PossessionSave", "PossessionClose", "PossessionDelete" },
     config = function()
-      require "custom.configs.possession"
+      require "configs.possession"
     end,
   },
 
@@ -364,7 +400,7 @@ local plugins = {
     cmd = "SidebarNvimToggle",
     dependencies = "sidebar-nvim/sections-dap",
     config = function()
-      require "custom.configs.sidebar"
+      require "configs.sidebar"
     end,
   },
 
@@ -386,17 +422,16 @@ local plugins = {
     "MattesGroeger/vim-bookmarks",
     event = "VeryLazy",
     init = function()
-      require "custom.configs.bookmarks"
+      g.bookmark_no_default_key_mappings = 1
+      g.bookmark_sign = ""
     end,
   },
-
-  { "linux-cultist/venv-selector.nvim", event = "VeryLazy", config = true },
 
   {
     "linux-cultist/venv-selector.nvim",
     event = "VeryLazy",
     config = function()
-      require "custom.configs.venv"
+      require "configs.venv"
     end,
   },
 }

@@ -34,13 +34,50 @@ M.colorizer = {
   },
 }
 
-M.luasnip = {
-  require("luasnip.loaders.from_vscode").load { paths = { vim.fn.stdpath "config" .. "\\lua\\custom\\snippets" } },
+M.gitsigns = {
+  on_attach = function(bufnr) -- see configs.gitsigns.lua for the NvChad keymaps
+    local gs = package.loaded.gitsigns
+
+    local function opts(desc)
+      return { buffer = bufnr, desc = desc }
+    end
+
+    local map = vim.keymap.set
+
+    map("n", "[g", function()
+      if vim.wo.diff then
+        return "[g"
+      end
+      vim.schedule(function()
+        require("gitsigns").prev_hunk()
+      end)
+      return "<Ignore>"
+    end, { expr = true, desc = "Gitsigns Jump to prev hunk" })
+
+    map("n", "]g", function()
+      if vim.wo.diff then
+        return "]g"
+      end
+      vim.schedule(function()
+        require("gitsigns").next_hunk()
+      end)
+      return "<Ignore>"
+    end, { expr = true, desc = "Gitsigns Jump to next hunk" })
+
+    map("n", "<leader>gd", function()
+      require("gitsigns").toggle_deleted()
+    end, { desc = "Gitsigns Toggle deleted" })
+
+    map("n", "<leader>gr", gs.reset_hunk, opts "Reset Hunk")
+    map("n", "<leader>gp", gs.preview_hunk, opts "Preview Hunk")
+    map("n", "<leader>gb", gs.blame_line, opts "Blame Line")
+  end,
 }
 
 M.mason = {
   ensure_installed = {
     -- lua stuff
+    "lua-language-server",
     "stylua",
 
     -- web dev stuff
@@ -56,6 +93,8 @@ M.mason = {
     "clangd",
     "clang-format",
 
+    --"cpptools",
+
     -- python
     "black",
     "debugpy",
@@ -64,48 +103,14 @@ M.mason = {
     "pyright",
     "ruff",
 
-    --"cpptools",
-
     --"node-debug2-adapter",
-    --"js-debug-adapter"
+    --"js-debug-adapter"5jkkkjj
   },
 }
 
 M.nvimtree = {
-  git = { enable = true },
-
   renderer = {
     root_folder_label = true,
-    highlight_git = true,
-    icons = {
-      show = {
-        git = true,
-      },
-    },
-  },
-
-  view = {
-    float = {
-      enable = true,
-      open_win_config = function()
-        local screen_w = vim.opt.columns:get()
-        local screen_h = vim.opt.lines:get() - vim.opt.cmdheight:get()
-        local window_w = screen_w * 0.5 -- width constant
-        local window_h = screen_h * 0.5 -- heigth constant
-        local window_w_int = math.floor(window_w)
-        local window_h_int = math.floor(window_h)
-        local center_x = (screen_w - window_w) / 2
-        local center_y = ((vim.opt.lines:get() - window_h) / 2) - vim.opt.cmdheight:get()
-        return {
-          border = "rounded",
-          relative = "editor",
-          row = center_y,
-          col = center_x,
-          width = window_w_int,
-          height = window_h_int,
-        }
-      end,
-    },
   },
 }
 
@@ -118,26 +123,16 @@ M.nvterm = {
   },
 }
 
-M.telescope = {
-  extensions = {
-    fzf = {
-      fuzzy = true,
-      override_generic_sorter = true,
-      override_file_sorter = true,
-      case_mode = "smart_case",
-    },
-  },
-}
-
 M.treesitter = {
   autotag = { enable = true },
 
   ensure_installed = {
-    --"bash",
-    --"c",
-    --"cpp",
+    "bash",
+    "c",
+    "cpp",
     "css",
-    --"dockerfile",
+    "diff",
+    "dockerfile",
     "html",
     "htmldjango",
     "http",
@@ -149,16 +144,9 @@ M.treesitter = {
     "python",
     "regex",
     "scss",
-    --"sql",
+    "sql",
     "typescript",
     "vue",
-  },
-
-  indent = {
-    enable = true,
-    -- disable = {
-    --   "python"
-    -- },
   },
 
   matchup = { enable = true },
